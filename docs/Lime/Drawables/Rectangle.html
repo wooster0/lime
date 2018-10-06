@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.26.1">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../";
+</script>
+
+  <meta id="repository-name" content="github.com/r00ster91/lime">
+  <title>Lime::Drawables::Rectangle - github.com/r00ster91/lime</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/r00ster91/lime/Lime" data-name="lime">
+      <a href="../../Lime.html">Lime</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Cursor" data-name="lime::cursor">
+      <a href="../../Lime/Cursor.html">Cursor</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/r00ster91/lime/Lime/Drawables" data-name="lime::drawables">
+      <a href="../../Lime/Drawables.html">Drawables</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Circle" data-name="lime::drawables::circle">
+      <a href="../../Lime/Drawables/Circle.html">Circle</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/FilledRectangle" data-name="lime::drawables::filledrectangle">
+      <a href="../../Lime/Drawables/FilledRectangle.html">FilledRectangle</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Image" data-name="lime::drawables::image">
+      <a href="../../Lime/Drawables/Image.html">Image</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/r00ster91/lime/Lime/Drawables/Rectangle" data-name="lime::drawables::rectangle">
+      <a href="../../Lime/Drawables/Rectangle.html">Rectangle</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Rectangle/Type" data-name="lime::drawables::rectangle::type">
+      <a href="../../Lime/Drawables/Rectangle/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Window" data-name="lime::window">
+      <a href="../../Lime/Window.html">Window</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> Lime::Drawables::Rectangle
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Lime/Drawables/Rectangle.html">Lime::Drawables::Rectangle</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L22" target="_blank">
+        lime/drawables.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28x%3AInt32%2Cy%3AInt32%2Cwidth%3AInt32%2Cheight%3AInt32%2Ctype%3AType%3DDefault%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-class-method" class="signature"><strong>.new</strong>(x : Int32, y : Int32, width : Int32, height : Int32, type : Type = <span class="t">Default</span>, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)</a>
+        
+          <div class="summary"><p>Initializes a new <code><a href="../../Lime/Drawables/Rectangle.html">Rectangle</a></code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#color%3AColorize%3A%3AColor256%7CColorize%3A%3AColorANSI%7CColorize%3A%3AColorRGB-instance-method" class="signature"><strong>#color</strong> : Colorize::Color256 | Colorize::ColorANSI | Colorize::ColorRGB</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#color%3D%28color%3AColorize%3A%3AColor%29-instance-method" class="signature"><strong>#color=</strong>(color : Colorize::Color)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#draw-instance-method" class="signature"><strong>#draw</strong></a>
+        
+          <div class="summary"><p>Inserts the rectangle into the buffer.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#height%3D%28height%29-instance-method" class="signature"><strong>#height=</strong>(height)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#type%3ALime%3A%3ADrawables%3A%3ARectangle%3A%3AType-instance-method" class="signature"><strong>#type</strong> : Lime::Drawables::Rectangle::Type</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#type%3D%28type%29-instance-method" class="signature"><strong>#type=</strong>(type)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#width%3AInt32-instance-method" class="signature"><strong>#width</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#width%3D%28width%29-instance-method" class="signature"><strong>#width=</strong>(width)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#x%3AInt32-instance-method" class="signature"><strong>#x</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#x%3D%28x%29-instance-method" class="signature"><strong>#x=</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#y%3AInt32-instance-method" class="signature"><strong>#y</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#y%3D%28y%29-instance-method" class="signature"><strong>#y=</strong>(y)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(x:Int32,y:Int32,width:Int32,height:Int32,type:Type=Default,color:Colorize::Color=Colorize::ColorANSI::Default)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(x : Int32, y : Int32, width : Int32, height : Int32, type : <a href="../../Lime/Drawables/Rectangle/Type.html">Type</a> = <span class="t">Default</span>, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)
+
+        <a class="method-permalink" href="#new%28x%3AInt32%2Cy%3AInt32%2Cwidth%3AInt32%2Cheight%3AInt32%2Ctype%3AType%3DDefault%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a new <code><a href="../../Lime/Drawables/Rectangle.html">Rectangle</a></code>.</p>
+
+<p>For specifying the type of a <code><a href="../../Lime/Drawables/Rectangle.html">Rectangle</a></code>,
+you can use the Top Level Namespace constants
+<strong>Default</strong>, <strong>Double</strong> and <strong>Round</strong>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L111" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="color:Colorize::Color256|Colorize::ColorANSI|Colorize::ColorRGB-instance-method">
+      <div class="signature">
+        
+        def <strong>color</strong> : Colorize::Color256 | Colorize::ColorANSI | Colorize::ColorRGB
+
+        <a class="method-permalink" href="#color%3AColorize%3A%3AColor256%7CColorize%3A%3AColorANSI%7CColorize%3A%3AColorRGB-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="color=(color:Colorize::Color)-instance-method">
+      <div class="signature">
+        
+        def <strong>color=</strong>(color : Colorize::Color)
+
+        <a class="method-permalink" href="#color%3D%28color%3AColorize%3A%3AColor%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="draw-instance-method">
+      <div class="signature">
+        
+        def <strong>draw</strong>
+
+        <a class="method-permalink" href="#draw-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Inserts the rectangle into the buffer.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L117" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="height=(height)-instance-method">
+      <div class="signature">
+        
+        def <strong>height=</strong>(height)
+
+        <a class="method-permalink" href="#height%3D%28height%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L61" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="type:Lime::Drawables::Rectangle::Type-instance-method">
+      <div class="signature">
+        
+        def <strong>type</strong> : <a href="../../Lime/Drawables/Rectangle/Type.html">Lime::Drawables::Rectangle::Type</a>
+
+        <a class="method-permalink" href="#type%3ALime%3A%3ADrawables%3A%3ARectangle%3A%3AType-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="type=(type)-instance-method">
+      <div class="signature">
+        
+        def <strong>type=</strong>(type)
+
+        <a class="method-permalink" href="#type%3D%28type%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L64" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="width:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>width</strong> : Int32
+
+        <a class="method-permalink" href="#width%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="width=(width)-instance-method">
+      <div class="signature">
+        
+        def <strong>width=</strong>(width)
+
+        <a class="method-permalink" href="#width%3D%28width%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L57" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="x:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>x</strong> : Int32
+
+        <a class="method-permalink" href="#x%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="x=(x)-instance-method">
+      <div class="signature">
+        
+        def <strong>x=</strong>(x)
+
+        <a class="method-permalink" href="#x%3D%28x%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="y:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>y</strong> : Int32
+
+        <a class="method-permalink" href="#y%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="y=(y)-instance-method">
+      <div class="signature">
+        
+        def <strong>y=</strong>(y)
+
+        <a class="method-permalink" href="#y%3D%28y%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/c6e19d94cf64f2af82836907303c3326d5622893/src/lime/drawables.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
