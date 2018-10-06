@@ -1,0 +1,14 @@
+name: lime
+version: 0.7.5
+
+authors:
+  - r00ster91 <r00ster91@outlook.com>
+
+description:
+  A library for drawing graphics on the console screen
+
+dependencies:
+  stumpy_png:
+    github: stumpycr/stumpy_png
+
+license: MIT
