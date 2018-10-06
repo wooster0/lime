@@ -73,7 +73,7 @@ module Lime
     # If none of the above keys are pressed, the key is returned as is.
     #
     # If no key is pressed, returns `nil`.
-    def check_key : String?
+    def check_key : Symbol | String | Nil
       case key = check_key_raw
       {{KEY_BODY.id}}
     end
@@ -85,8 +85,10 @@ module Lime
       io.read_timeout = 0.1
       buffer = Bytes.new(3)
       String.new(buffer[0, io.read(buffer)])
+    rescue IO::Timeout
+    ensure
+      io.read_timeout = nil
     end
-  rescue IO::Timeout
   end
 
   # Inserts *char* into the buffer at *x*, *y*.
@@ -342,7 +344,3 @@ module Lime
     end
   end
 end
-
-require "../lime/drawables"
-include Lime::Drawables
-Rectangle

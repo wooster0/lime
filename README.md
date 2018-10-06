@@ -25,7 +25,7 @@ dependencies:
 
 ## Example usage
 
-Three lights that are blinking after order:
+Three lights flashing repeatedly in order:
 
 ```crystal
 require "lime"
@@ -97,4 +97,4 @@ See `examples/` for more examples.
 
 ## Contributors
 
-- [r00ster91](https://github.com/r00ster91) r00ster91 - creator, maintainer
+- [r00ster91](https://github.com/r00ster91) - creator, maintainer
