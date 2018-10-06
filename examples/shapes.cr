@@ -1,4 +1,3 @@
-# Remove "../src/" if you copy this example.
 require "../src/lime"
 require "../src/lime/drawables"
 include Lime::Drawables

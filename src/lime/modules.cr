@@ -40,25 +40,29 @@ module Lime
   module Cursor
     extend self
 
-    # Shows or hides the cursor.
-    def visible=(visible : Bool)
-      print (visible ? "\e[?25h" : "\e[?25l")
-    end
-
+    # Moves the cursor up by *cells* cells.
     def move_up(cells = 1)
       print "\e[#{cells}A"
     end
 
+    # Moves the cursor down by *cells* cells.
     def move_down(cells = 1)
       print "\e[#{cells}B"
     end
 
+    # Moves the cursor right by *cells* cells.
     def move_right(cells = 1)
       print "\e[#{cells}C"
     end
 
+    # Moves the cursor left by *cells* cells.
     def move_left(cells = 1)
       print "\e[#{cells}D"
+    end
+
+    # Shows or hides the cursor.
+    def visible=(visible : Bool)
+      print(visible ? "\e[?25h" : "\e[?25l")
     end
 
     # Sets the position of the cursor to *position*.

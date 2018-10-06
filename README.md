@@ -1,3 +1,5 @@
+[![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://r00ster91.github.io/lime/)
+
 # lime
 
 A library for drawing graphics on the console screen
@@ -85,11 +87,11 @@ loop do
 end
 ```
 
-See `examples/` for more examples.
+See [`examples/`](https://github.com/r00ster91/lime/tree/master/examples) for more examples.
 
 ## Contributing
 
-1. Fork it (https://github.com/r00ster91/lime/fork)
+1. Fork it (<https://github.com/r00ster91/lime/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
