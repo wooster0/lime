@@ -20,9 +20,9 @@ module Lime
   end
 
   private KEYS = {
-    {:enter, "enter"},
     {:up, "up arrow"}, {:down, "down arrow"},
     {:left, "left arrow"}, {:right, "right arrow"},
+    {:enter, "enter"},
     {:tab, "tab"},
     {:backspace, "backspace"},
     {:escape, "escape"},
@@ -30,8 +30,6 @@ module Lime
   }
 
   private KEY_BODY = <<-KEY_BODY
-    when "\\r", "\\n"
-      :enter
     when "\\e[A"
       :up
     when "\\e[B"
@@ -40,6 +38,8 @@ module Lime
       :right
     when "\\e[D"
       :left
+    when "\\r", "\\n"
+      :enter
     when "\t"
       :tab
     when "\\u{7f}", "\\b"
@@ -92,19 +92,19 @@ module Lime
   end
 
   # Inserts *char* into the buffer at *x*, *y*.
-  def print(char : Char | Colorize::Object(Char), x, y)
+  def print(char : Char | Colorize::Object(Char), x : Int32, y : Int32)
     @@buffer[x + Window.width * y] = char
   end
 
   # Inserts *string* into the buffer at *x*, *y*.
-  def print(string : String, x, y)
+  def print(string : String, x : Int32, y : Int32)
     string.each_char_with_index do |char, i|
       @@buffer[x + i + Window.width * y] = char
     end
   end
 
   # :ditto:
-  def print(string : Colorize::Object(String), x, y)
+  def print(string : Colorize::Object(String), x : Int32, y : Int32)
     fore = string.fore
     back = string.back
     string = string.to_s
@@ -130,7 +130,7 @@ module Lime
   #     hello
   #     world
   # ```
-  def printf(string : String, x, y)
+  def printf(string : String, x : Int32, y : Int32)
     i = 0
     string.each_line do |line|
       Lime.print(line, x, y + i)
@@ -139,7 +139,7 @@ module Lime
   end
 
   # :ditto:
-  def printf(string : Colorize::Object(String), x, y)
+  def printf(string : Colorize::Object(String), x : Int32, y : Int32)
     fore = string.fore
     back = string.back
     string = string.to_s
@@ -198,7 +198,7 @@ module Lime
   end
 
   # Inserts a block (`▀`) at *x*, *y* with *color* into the buffer.
-  def pixel(x, y, color : Colorize::Color = Colorize::ColorANSI::Default)
+  def pixel(x : Int32, y : Int32, color : Colorize::Color = Colorize::ColorANSI::Default)
     position = x + (y/2)*Window.width
 
     if color == Colorize::ColorANSI::Default
@@ -284,7 +284,8 @@ module Lime
   # Inserts a line from *x1*, *y1* to *x2*, *y2* with *color* into the buffer.
   #
   # This method uses [Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm).
-  def line(x1, y1, x2, y2, color : Colorize::Color = Colorize::ColorANSI::Default)
+  def line(x1 : Int32, y1 : Int32,
+           x2 : Int32, y2 : Int32, color : Colorize::Color = Colorize::ColorANSI::Default)
     if (y2 - y1).abs < (x2 - x1).abs
       if x2 > x2
         Lime.line_low(x2, y2, x1, y1, color)
