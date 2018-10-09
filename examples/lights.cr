@@ -5,12 +5,12 @@ include Lime::Drawables
 # Create the lights:
 # they are red, green and blue rectangles with doubled lines
 light1 = Rectangle.new(
-  x: 1, y: 1,
+  x: 2, y: 1,
   width: 5, height: 3,
   type: Double, color: :red
 )
-light2 = Rectangle.new(7, 1, 5, 3, Double, :green)
-light3 = Rectangle.new(13, 1, 5, 3, Double, :blue)
+light2 = Rectangle.new(8, 1, 5, 3, Double, :green)
+light3 = Rectangle.new(14, 1, 5, 3, Double, :blue)
 
 # The light that is currently on
 active = 1
