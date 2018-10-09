@@ -11,14 +11,6 @@ module Lime
   @@empty_buffer = Array(Char | Colorize::Object(Char)).new(Window.width*Window.height) { ' ' }
   @@buffer : Array(Char | Colorize::Object(Char)) = @@empty_buffer.dup
 
-  # Waits until a key has been pressed and returns it.
-  def get_key_raw : String
-    STDIN.raw do |io|
-      buffer = Bytes.new(3)
-      String.new(buffer[0, io.read(buffer)])
-    end
-  end
-
   private KEYS = {
     {:up, "up arrow"}, {:down, "down arrow"},
     {:left, "left arrow"}, {:right, "right arrow"},
@@ -60,6 +52,8 @@ module Lime
     {% end %}
     #
     # If none of the above keys are pressed, the key is returned as is.
+    #
+    # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
     def get_key : Symbol | String
       case key = get_key_raw
       {{KEY_BODY.id}}
@@ -78,6 +72,16 @@ module Lime
       {{KEY_BODY.id}}
     end
   {% end %}
+
+  # Waits until a key has been pressed and returns it.
+  #
+  # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
+  def get_key_raw : String
+    STDIN.raw do |io|
+      buffer = Bytes.new(3)
+      String.new(buffer[0, io.read(buffer)])
+    end
+  end
 
   # Checks if a key is pressed, if it is, returns it, otherwise returns `nil`.
   def check_key_raw : String?
