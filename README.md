@@ -25,7 +25,7 @@ dependencies:
     github: r00ster91/lime
 ```
 
-## Example usage
+## Example
 
 Three lights flashing repeatedly in order:
 
@@ -36,8 +36,8 @@ require "lime"
 require "lime/drawables"
 include Lime::Drawables
 
-# Create the lights.
-# They are red, green and blue rectangles with doubled lines
+# Create the lights:
+# they are red, green and blue rectangles with doubled lines
 light1 = Rectangle.new(
   x: 1, y: 1,
   width: 5, height: 3,

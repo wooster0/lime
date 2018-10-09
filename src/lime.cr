@@ -197,7 +197,7 @@ module Lime
     end
   end
 
-  # Inserts a block (`▀`) at *x*, *y* with *color* into the buffefr.
+  # Inserts a block (`▀`) at *x*, *y* with *color* into the buffer.
   def pixel(x, y, color : Colorize::Color = Colorize::ColorANSI::Default)
     position = x + (y/2)*Window.width
 
@@ -281,38 +281,38 @@ module Lime
     end)
   end
 
-  # Inserts a line from *x0*, *y0* to *x1*, *y1* with *color* into the buffer.
+  # Inserts a line from *x1*, *y1* to *x2*, *y2* with *color* into the buffer.
   #
   # This method uses [Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm).
-  def line(x0, y0, x1, y1, color : Colorize::Color = Colorize::ColorANSI::Default)
-    if (y1 - y0).abs < (x1 - x0).abs
-      if x1 > x1
-        Lime.line_low(x1, y1, x0, y0, color)
+  def line(x1, y1, x2, y2, color : Colorize::Color = Colorize::ColorANSI::Default)
+    if (y2 - y1).abs < (x2 - x1).abs
+      if x2 > x2
+        Lime.line_low(x2, y2, x1, y1, color)
       else
-        Lime.line_low(x0, y0, x1, y1, color)
+        Lime.line_low(x1, y1, x2, y2, color)
       end
     else
-      if y0 > y1
-        Lime.line_high(x1, y1, x0, y0, color)
+      if y1 > y2
+        Lime.line_high(x2, y2, x1, y1, color)
       else
-        Lime.line_high(x0, y0, x1, y1, color)
+        Lime.line_high(x1, y1, x2, y2, color)
       end
     end
   end
 
   # :nodoc:
-  def line_low(x0, y0, x1, y1, color)
-    dx = x1 - x0
-    dy = y1 - y0
+  def line_low(x1, y1, x2, y2, color)
+    dx = x2 - x1
+    dy = y2 - y1
     yi = 1
     if dy < 0
       yi = -1
       dy = -dy
     end
     d = 2*dy - dx
-    y = y0
+    y = y1
 
-    (x0..x1).each do |x|
+    (x1..x2).each do |x|
       Lime.pixel(x, y, color)
       if d > 0
         y = y + yi
@@ -323,18 +323,18 @@ module Lime
   end
 
   # :nodoc:
-  def line_high(x0, y0, x1, y1, color)
-    dx = x1 - x0
-    dy = y1 - y0
+  def line_high(x1, y1, x2, y2, color)
+    dx = x2 - x1
+    dy = y2 - y1
     xi = 1
     if dx < 0
       xi = -1
       dx = -dx
     end
     d = 2*dx - dy
-    x = x0
+    x = x1
 
-    (y0..y1).each do |y|
+    (y1..y2).each do |y|
       Lime.pixel(x, y, color)
       if d > 0
         x = x + xi
