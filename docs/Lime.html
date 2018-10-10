@@ -136,21 +136,21 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime/modules.cr#L1" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/modules.cr#L1" target="_blank">
         lime/modules.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L8" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L8" target="_blank">
         lime.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime/drawables.cr#L12" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L12" target="_blank">
         lime/drawables.cr
       </a>
     
@@ -178,7 +178,7 @@
       <li class="entry-summary">
         <a href="#check_key%3ASymbol%7CString%7CNil-instance-method" class="signature"><strong>#check_key</strong> : Symbol | String | Nil</a>
         
-          <div class="summary"><p>Checks if a key is pressed, if it is, returns - <code>:enter</code> if enter has been pressed.</p></div>
+          <div class="summary"><p>Checks if a key is pressed, if it is, returns - <code>:up</code> if up arrow has been pressed.</p></div>
         
       </li>
     
@@ -206,7 +206,7 @@
       <li class="entry-summary">
         <a href="#get_key%3ASymbol%7CString-instance-method" class="signature"><strong>#get_key</strong> : Symbol | String</a>
         
-          <div class="summary"><p>Waits until a key has been pressed and returns - <code>:enter</code> if enter has been pressed.</p></div>
+          <div class="summary"><p>Waits until a key has been pressed and returns - <code>:up</code> if up arrow has been pressed.</p></div>
         
       </li>
     
@@ -218,9 +218,9 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#line%28x0%2Cy0%2Cx1%2Cy1%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method" class="signature"><strong>#line</strong>(x0, y0, x1, y1, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)</a>
+        <a href="#line%28x1%3AInt32%2Cy1%3AInt32%2Cx2%3AInt32%2Cy2%3AInt32%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method" class="signature"><strong>#line</strong>(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)</a>
         
-          <div class="summary"><p>Inserts a line from <em>x0</em>, <em>y0</em> to <em>x1</em>, <em>y1</em> with <em>color</em> into the buffer.</p></div>
+          <div class="summary"><p>Inserts a line from <em>x1</em>, <em>y1</em> to <em>x2</em>, <em>y2</em> with <em>color</em> into the buffer.</p></div>
         
       </li>
     
@@ -232,42 +232,42 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#pixel%28x%2Cy%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method" class="signature"><strong>#pixel</strong>(x, y, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)</a>
+        <a href="#pixel%28x%3AInt32%2Cy%3AInt32%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method" class="signature"><strong>#pixel</strong>(x : Int32, y : Int32, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)</a>
         
-          <div class="summary"><p>Inserts a block (<code>▀</code>) at <em>x</em>, <em>y</em> with <em>color</em> into the buffefr.</p></div>
+          <div class="summary"><p>Inserts a block (<code>▀</code>) at <em>x</em>, <em>y</em> with <em>color</em> into the buffer.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%2Cy%29-instance-method" class="signature"><strong>#print</strong>(char : Char | Colorize::Object(Char), x, y)</a>
+        <a href="#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method" class="signature"><strong>#print</strong>(char : Char | Colorize::Object(Char), x : Int32, y : Int32)</a>
         
           <div class="summary"><p>Inserts <em>char</em> into the buffer at <em>x</em>, <em>y</em>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#print%28string%3AString%2Cx%2Cy%29-instance-method" class="signature"><strong>#print</strong>(string : String, x, y)</a>
+        <a href="#print%28string%3AString%2Cx%3AInt32%2Cy%3AInt32%29-instance-method" class="signature"><strong>#print</strong>(string : String, x : Int32, y : Int32)</a>
         
           <div class="summary"><p>Inserts <em>string</em> into the buffer at <em>x</em>, <em>y</em>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#print%28string%3AColorize%3A%3AObject%28String%29%2Cx%2Cy%29-instance-method" class="signature"><strong>#print</strong>(string : Colorize::Object(String), x, y)</a>
+        <a href="#print%28string%3AColorize%3A%3AObject%28String%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method" class="signature"><strong>#print</strong>(string : Colorize::Object(String), x : Int32, y : Int32)</a>
         
           <div class="summary"><p>Inserts <em>string</em> into the buffer at <em>x</em>, <em>y</em>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#printf%28string%3AString%2Cx%2Cy%29-instance-method" class="signature"><strong>#printf</strong>(string : String, x, y)</a>
+        <a href="#printf%28string%3AString%2Cx%3AInt32%2Cy%3AInt32%29-instance-method" class="signature"><strong>#printf</strong>(string : String, x : Int32, y : Int32)</a>
         
           <div class="summary"><p>Inserts <em>string</em> formatted into the buffer at <em>x</em>, <em>y</em>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#printf%28string%3AColorize%3A%3AObject%28String%29%2Cx%2Cy%29-instance-method" class="signature"><strong>#printf</strong>(string : Colorize::Object(String), x, y)</a>
+        <a href="#printf%28string%3AColorize%3A%3AObject%28String%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method" class="signature"><strong>#printf</strong>(string : Colorize::Object(String), x : Int32, y : Int32)</a>
         
           <div class="summary"><p>Inserts <em>string</em> formatted into the buffer at <em>x</em>, <em>y</em>.</p></div>
         
@@ -310,7 +310,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L166" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L170" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -325,7 +325,7 @@
       
         <div class="doc"><p>Checks if a key is pressed, if it is, returns</p>
 
-<ul><li><code>:enter</code> if enter has been pressed.</li><li><code>:up</code> if up arrow has been pressed.</li><li><code>:down</code> if down arrow has been pressed.</li><li><code>:left</code> if left arrow has been pressed.</li><li><code>:right</code> if right arrow has been pressed.</li><li><code>:tab</code> if tab has been pressed.</li><li><code>:backspace</code> if backspace has been pressed.</li><li><code>:escape</code> if escape has been pressed.</li><li><code>:ctrl_c</code> if Ctrl+C has been pressed.</li></ul>
+<ul><li><code>:up</code> if up arrow has been pressed.</li><li><code>:down</code> if down arrow has been pressed.</li><li><code>:left</code> if left arrow has been pressed.</li><li><code>:right</code> if right arrow has been pressed.</li><li><code>:enter</code> if enter has been pressed.</li><li><code>:tab</code> if tab has been pressed.</li><li><code>:backspace</code> if backspace has been pressed.</li><li><code>:escape</code> if escape has been pressed.</li><li><code>:ctrl_c</code> if Ctrl+C has been pressed.</li></ul>
 
 <p>If none of the above keys are pressed, the key is returned as is.</p>
 
@@ -334,7 +334,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -352,7 +352,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L83" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L87" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -370,7 +370,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L160" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L164" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -388,7 +388,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L180" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L184" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -403,14 +403,16 @@
       
         <div class="doc"><p>Waits until a key has been pressed and returns</p>
 
-<ul><li><code>:enter</code> if enter has been pressed.</li><li><code>:up</code> if up arrow has been pressed.</li><li><code>:down</code> if down arrow has been pressed.</li><li><code>:left</code> if left arrow has been pressed.</li><li><code>:right</code> if right arrow has been pressed.</li><li><code>:tab</code> if tab has been pressed.</li><li><code>:backspace</code> if backspace has been pressed.</li><li><code>:escape</code> if escape has been pressed.</li><li><code>:ctrl_c</code> if Ctrl+C has been pressed.</li></ul>
+<ul><li><code>:up</code> if up arrow has been pressed.</li><li><code>:down</code> if down arrow has been pressed.</li><li><code>:left</code> if left arrow has been pressed.</li><li><code>:right</code> if right arrow has been pressed.</li><li><code>:enter</code> if enter has been pressed.</li><li><code>:tab</code> if tab has been pressed.</li><li><code>:backspace</code> if backspace has been pressed.</li><li><code>:escape</code> if escape has been pressed.</li><li><code>:ctrl_c</code> if Ctrl+C has been pressed.</li></ul>
 
-<p>If none of the above keys are pressed, the key is returned as is.</p></div>
+<p>If none of the above keys are pressed, the key is returned as is.</p>
+
+<p><span class="flag purple">NOTE</span>  Ctrl+C is caught by this method and will not be handled by the system.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -423,32 +425,34 @@
         <a class="method-permalink" href="#get_key_raw%3AString-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Waits until a key has been pressed and returns it.</p></div>
+        <div class="doc"><p>Waits until a key has been pressed and returns it.</p>
+
+<p><span class="flag purple">NOTE</span>  Ctrl+C is caught by this method and will not be handled by the system.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="line(x0,y0,x1,y1,color:Colorize::Color=Colorize::ColorANSI::Default)-instance-method">
+    <div class="entry-detail" id="line(x1:Int32,y1:Int32,x2:Int32,y2:Int32,color:Colorize::Color=Colorize::ColorANSI::Default)-instance-method">
       <div class="signature">
         
-        def <strong>line</strong>(x0, y0, x1, y1, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)
+        def <strong>line</strong>(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)
 
-        <a class="method-permalink" href="#line%28x0%2Cy0%2Cx1%2Cy1%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method">#</a>
+        <a class="method-permalink" href="#line%28x1%3AInt32%2Cy1%3AInt32%2Cx2%3AInt32%2Cy2%3AInt32%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Inserts a line from <em>x0</em>, <em>y0</em> to <em>x1</em>, <em>y1</em> with <em>color</em> into the buffer.</p>
+        <div class="doc"><p>Inserts a line from <em>x1</em>, <em>y1</em> to <em>x2</em>, <em>y2</em> with <em>color</em> into the buffer.</p>
 
 <p>This method uses <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm" target="_blank">Bresenham's line algorithm</a>.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L287" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L291" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -473,35 +477,35 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L192" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L196" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="pixel(x,y,color:Colorize::Color=Colorize::ColorANSI::Default)-instance-method">
+    <div class="entry-detail" id="pixel(x:Int32,y:Int32,color:Colorize::Color=Colorize::ColorANSI::Default)-instance-method">
       <div class="signature">
         
-        def <strong>pixel</strong>(x, y, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)
+        def <strong>pixel</strong>(x : Int32, y : Int32, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)
 
-        <a class="method-permalink" href="#pixel%28x%2Cy%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method">#</a>
+        <a class="method-permalink" href="#pixel%28x%3AInt32%2Cy%3AInt32%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Inserts a block (<code>▀</code>) at <em>x</em>, <em>y</em> with <em>color</em> into the buffefr.</p></div>
+        <div class="doc"><p>Inserts a block (<code>▀</code>) at <em>x</em>, <em>y</em> with <em>color</em> into the buffer.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L201" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L205" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="print(char:Char|Colorize::Object(Char),x,y)-instance-method">
+    <div class="entry-detail" id="print(char:Char|Colorize::Object(Char),x:Int32,y:Int32)-instance-method">
       <div class="signature">
         
-        def <strong>print</strong>(char : Char | <a href="Colorize/Object.html">Colorize::Object</a>(Char), x, y)
+        def <strong>print</strong>(char : Char | <a href="Colorize/Object.html">Colorize::Object</a>(Char), x : Int32, y : Int32)
 
-        <a class="method-permalink" href="#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%2Cy%29-instance-method">#</a>
+        <a class="method-permalink" href="#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Inserts <em>char</em> into the buffer at <em>x</em>, <em>y</em>.</p></div>
@@ -509,17 +513,17 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L95" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L99" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="print(string:String,x,y)-instance-method">
+    <div class="entry-detail" id="print(string:String,x:Int32,y:Int32)-instance-method">
       <div class="signature">
         
-        def <strong>print</strong>(string : String, x, y)
+        def <strong>print</strong>(string : String, x : Int32, y : Int32)
 
-        <a class="method-permalink" href="#print%28string%3AString%2Cx%2Cy%29-instance-method">#</a>
+        <a class="method-permalink" href="#print%28string%3AString%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Inserts <em>string</em> into the buffer at <em>x</em>, <em>y</em>.</p></div>
@@ -527,17 +531,17 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L104" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="print(string:Colorize::Object(String),x,y)-instance-method">
+    <div class="entry-detail" id="print(string:Colorize::Object(String),x:Int32,y:Int32)-instance-method">
       <div class="signature">
         
-        def <strong>print</strong>(string : <a href="Colorize/Object.html">Colorize::Object</a>(String), x, y)
+        def <strong>print</strong>(string : <a href="Colorize/Object.html">Colorize::Object</a>(String), x : Int32, y : Int32)
 
-        <a class="method-permalink" href="#print%28string%3AColorize%3A%3AObject%28String%29%2Cx%2Cy%29-instance-method">#</a>
+        <a class="method-permalink" href="#print%28string%3AColorize%3A%3AObject%28String%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Inserts <em>string</em> into the buffer at <em>x</em>, <em>y</em>.</p></div>
@@ -545,22 +549,22 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L107" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="printf(string:String,x,y)-instance-method">
+    <div class="entry-detail" id="printf(string:String,x:Int32,y:Int32)-instance-method">
       <div class="signature">
         
-        def <strong>printf</strong>(string : String, x, y)
+        def <strong>printf</strong>(string : String, x : Int32, y : Int32)
 
-        <a class="method-permalink" href="#printf%28string%3AString%2Cx%2Cy%29-instance-method">#</a>
+        <a class="method-permalink" href="#printf%28string%3AString%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Inserts <em>string</em> formatted into the buffer at <em>x</em>, <em>y</em>.</p>
 
-<p>This method properly handles newlines in the string unlike <code><a href="Lime.html#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%2Cy%29-instance-method">#print</a></code>:</p>
+<p>This method properly handles newlines in the string unlike <code><a href="Lime.html#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#print</a></code>:</p>
 
 <pre><code><span class="t">Lime</span>.printf(<span class="s">&quot;hello\nworld&quot;</span>, <span class="n">2</span>, <span class="n">2</span>)</code></pre>
 
@@ -572,22 +576,22 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L133" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L137" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="printf(string:Colorize::Object(String),x,y)-instance-method">
+    <div class="entry-detail" id="printf(string:Colorize::Object(String),x:Int32,y:Int32)-instance-method">
       <div class="signature">
         
-        def <strong>printf</strong>(string : <a href="Colorize/Object.html">Colorize::Object</a>(String), x, y)
+        def <strong>printf</strong>(string : <a href="Colorize/Object.html">Colorize::Object</a>(String), x : Int32, y : Int32)
 
-        <a class="method-permalink" href="#printf%28string%3AColorize%3A%3AObject%28String%29%2Cx%2Cy%29-instance-method">#</a>
+        <a class="method-permalink" href="#printf%28string%3AColorize%3A%3AObject%28String%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Inserts <em>string</em> formatted into the buffer at <em>x</em>, <em>y</em>.</p>
 
-<p>This method properly handles newlines in the string unlike <code><a href="Lime.html#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%2Cy%29-instance-method">#print</a></code>:</p>
+<p>This method properly handles newlines in the string unlike <code><a href="Lime.html#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#print</a></code>:</p>
 
 <pre><code><span class="t">Lime</span>.printf(<span class="s">&quot;hello\nworld&quot;</span>, <span class="n">2</span>, <span class="n">2</span>)</code></pre>
 
@@ -599,7 +603,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L142" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L146" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -617,7 +621,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/d0ac9c62a0f6aed72a03cc7ba5176efd05a1f0c9/src/lime.cr#L175" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L179" target="_blank">View source</a>]
         
       </div>
     </div>

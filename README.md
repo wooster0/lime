@@ -7,6 +7,7 @@ A library for drawing graphics on the console screen
 ## Features
 
 * Drawing of
+  * text
   * PNG images
   * rectangles
   * filled rectangles
@@ -88,6 +89,7 @@ end
 ```
 
 In the top left corner we can see:
+
 ![lights](https://i.imgur.com/hDHDiJB.gif)
 
 See [`examples/`](https://github.com/r00ster91/lime/tree/master/examples) for more examples.
