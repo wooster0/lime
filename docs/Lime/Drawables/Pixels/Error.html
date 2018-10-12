@@ -6,15 +6,15 @@
 <meta name="generator" content="Crystal Docs 0.26.1">
 
 
-<link href="../css/style.css" rel="stylesheet" type="text/css">
+<link href="../../../css/style.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript" src="../../../js/doc.js"></script>
 <script type="text/javascript">
-  CrystalDoc.base_path = "../";
+  CrystalDoc.base_path = "../../../";
 </script>
 
   <meta id="repository-name" content="github.com/r00ster91/lime">
-  <title>Lime::Drawables - github.com/r00ster91/lime</title>
+  <title>Lime::Drawables::Pixels::Error - github.com/r00ster91/lime</title>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
     </div>
 
     <div class="repository-links">
-      <a href="../index.html">README</a>
+      <a href="../../../index.html">README</a>
     </div>
   </div>
 
@@ -37,37 +37,37 @@
     <ul>
   
   <li class="parent open current" data-id="github.com/r00ster91/lime/Lime" data-name="lime">
-      <a href="../Lime.html">Lime</a>
+      <a href="../../../Lime.html">Lime</a>
       
         <ul>
   
   <li class=" " data-id="github.com/r00ster91/lime/Lime/Cursor" data-name="lime::cursor">
-      <a href="../Lime/Cursor.html">Cursor</a>
+      <a href="../../../Lime/Cursor.html">Cursor</a>
       
     </li>
   
   <li class="parent open current" data-id="github.com/r00ster91/lime/Lime/Drawables" data-name="lime::drawables">
-      <a href="../Lime/Drawables.html">Drawables</a>
+      <a href="../../../Lime/Drawables.html">Drawables</a>
       
         <ul>
   
   <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Circle" data-name="lime::drawables::circle">
-      <a href="../Lime/Drawables/Circle.html">Circle</a>
+      <a href="../../../Lime/Drawables/Circle.html">Circle</a>
       
     </li>
   
   <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/FilledRectangle" data-name="lime::drawables::filledrectangle">
-      <a href="../Lime/Drawables/FilledRectangle.html">FilledRectangle</a>
+      <a href="../../../Lime/Drawables/FilledRectangle.html">FilledRectangle</a>
       
     </li>
   
-  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels" data-name="lime::drawables::pixels">
-      <a href="../Lime/Drawables/Pixels.html">Pixels</a>
+  <li class="parent open current" data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels" data-name="lime::drawables::pixels">
+      <a href="../../../Lime/Drawables/Pixels.html">Pixels</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels/Error" data-name="lime::drawables::pixels::error">
-      <a href="../Lime/Drawables/Pixels/Error.html">Error</a>
+  <li class=" current" data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels/Error" data-name="lime::drawables::pixels::error">
+      <a href="../../../Lime/Drawables/Pixels/Error.html">Error</a>
       
     </li>
   
@@ -77,12 +77,12 @@
     </li>
   
   <li class="parent " data-id="github.com/r00ster91/lime/Lime/Drawables/Rectangle" data-name="lime::drawables::rectangle">
-      <a href="../Lime/Drawables/Rectangle.html">Rectangle</a>
+      <a href="../../../Lime/Drawables/Rectangle.html">Rectangle</a>
       
         <ul>
   
   <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Rectangle/Type" data-name="lime::drawables::rectangle::type">
-      <a href="../Lime/Drawables/Rectangle/Type.html">Type</a>
+      <a href="../../../Lime/Drawables/Rectangle/Type.html">Type</a>
       
     </li>
   
@@ -97,7 +97,7 @@
     </li>
   
   <li class=" " data-id="github.com/r00ster91/lime/Lime/Window" data-name="lime::window">
-      <a href="../Lime/Window.html">Window</a>
+      <a href="../../../Lime/Window.html">Window</a>
       
     </li>
   
@@ -115,23 +115,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Lime::Drawables
+  <span class="kind">class</span> Lime::Drawables::Pixels::Error
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Lime/Drawables/Pixels/Error.html">Lime::Drawables::Pixels::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
   <h2>Overview</h2>
 
-  <p>This module contains drawables that can be inserted into the buffer.</p>
-
-<p>If you want to use the drawables in the Top Level Namespace,
-you can <code>include</code> it:</p>
-
-<pre><code><span class="k">require</span> <span class="s">&quot;lime/drawables&quot;</span>
-<span class="k">include</span> <span class="t">Lime</span><span class="t">::</span><span class="t">Drawables</span></code></pre>
+  <p>Raised when an invalid color character is found in a pixel string.</p>
 
 
 
@@ -149,7 +145,7 @@ you can <code>include</code> it:</p>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L21" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L212" target="_blank">
         lime/drawables.cr
       </a>
     
@@ -169,6 +165,36 @@ you can <code>include</code> it:</p>
 
 
 <div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
   
 </div>
 

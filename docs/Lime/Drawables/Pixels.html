@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/r00ster91/lime">
-  <title>Lime::Drawables::Image - github.com/r00ster91/lime</title>
+  <title>Lime::Drawables::Pixels - github.com/r00ster91/lime</title>
 </head>
 <body>
 
@@ -61,8 +61,18 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/r00ster91/lime/Lime/Drawables/Image" data-name="lime::drawables::image">
-      <a href="../../Lime/Drawables/Image.html">Image</a>
+  <li class="parent open current" data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels" data-name="lime::drawables::pixels">
+      <a href="../../Lime/Drawables/Pixels.html">Pixels</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels/Error" data-name="lime::drawables::pixels::error">
+      <a href="../../Lime/Drawables/Pixels/Error.html">Error</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -105,12 +115,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> Lime::Drawables::Image
+  <span class="kind">struct</span> Lime::Drawables::Pixels
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Lime/Drawables/Image.html">Lime::Drawables::Image</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Lime/Drawables/Pixels.html">Lime::Drawables::Pixels</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -131,7 +141,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L207" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L207" target="_blank">
         lime/drawables.cr
       </a>
     
@@ -148,7 +158,14 @@
       <li class="entry-summary">
         <a href="#new%28path%3AString%2Cx%3AInt32%2Cy%3AInt32%29-class-method" class="signature"><strong>.new</strong>(path : String, x : Int32, y : Int32)</a>
         
-          <div class="summary"><p>Initializes a new <code><a href="../../Lime/Drawables/Image.html">Image</a></code>.</p></div>
+          <div class="summary"><p>Initializes new <code><a href="../../Lime/Drawables/Pixels.html">Pixels</a></code> from an image.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28x%3AInt32%2Cy%3AInt32%2Cpixels%3AString%29-class-method" class="signature"><strong>.new</strong>(x : Int32, y : Int32, pixels : String)</a>
+        
+          <div class="summary"><p>Initializes new <code><a href="../../Lime/Drawables/Pixels.html">Pixels</a></code> from a string.</p></div>
         
       </li>
     
@@ -164,7 +181,7 @@
       <li class="entry-summary">
         <a href="#draw-instance-method" class="signature"><strong>#draw</strong></a>
         
-          <div class="summary"><p>Inserts the image into the buffer.</p></div>
+          <div class="summary"><p>Inserts the pixels into the buffer.</p></div>
         
       </li>
     
@@ -176,7 +193,7 @@
       <li class="entry-summary">
         <a href="#map%28%26block%29-instance-method" class="signature"><strong>#map</strong>(&block)</a>
         
-          <div class="summary"><p>Invokes the given block for each pixel of the image, replacing the pixel with the pixel returned by the block.</p></div>
+          <div class="summary"><p>Invokes the given block for each of the pixels, replacing the pixel with the pixel returned by the block.</p></div>
         
       </li>
     
@@ -256,14 +273,59 @@
         <a class="method-permalink" href="#new%28path%3AString%2Cx%3AInt32%2Cy%3AInt32%29-class-method">#</a>
       </div>
       
-        <div class="doc"><p>Initializes a new <code><a href="../../Lime/Drawables/Image.html">Image</a></code>.</p>
+        <div class="doc"><p>Initializes new <code><a href="../../Lime/Drawables/Pixels.html">Pixels</a></code> from an image.</p>
 
 <p><em>path</em> must lead to an PNG encoded image.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L216" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L220" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(x:Int32,y:Int32,pixels:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(x : Int32, y : Int32, pixels : String)
+
+        <a class="method-permalink" href="#new%28x%3AInt32%2Cy%3AInt32%2Cpixels%3AString%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes new <code><a href="../../Lime/Drawables/Pixels.html">Pixels</a></code> from a string.</p>
+
+<p>Iterates through every character of <em>pixels</em> and every time a color character
+is found, it's replaced with its color.</p>
+
+<p>Available color characters are:</p>
+
+<ul><li><code>'1'</code>: default</li><li><code>'0'</code>: black</li><li><code>'9'</code>: dark gray</li><li><code>'6'</code>: light gray</li><li><code>'r'</code>: red</li><li><code>'g'</code>: green</li><li><code>'b'</code>: blue</li><li><code>'y'</code>: yellow</li><li><code>'m'</code>: magenta</li><li><code>'c'</code>: cyan</li><li><code>'R'</code>: light red</li><li><code>'G'</code>: light green</li><li><code>'B'</code>: light blue</li><li><code>'Y'</code>: light yellow</li><li><code>'M'</code>: light magenta</li><li><code>'C'</code>: light cyan</li></ul>
+
+<p>Comments are also allowed in the string.</p>
+
+<p>Example:</p>
+
+<pre><code><span class="c"># A flower:</span>
+ <span class="t">RRR</span>
+<span class="t">RYYYR</span> <span class="c"># Head</span>
+ <span class="t">RRR</span>
+  g
+<span class="t">G</span> g <span class="t">G</span>
+<span class="t">GGgGG</span> <span class="c"># Stem</span>
+ <span class="t">GgG</span>
+  g</code></pre>
+
+<p>becomes:</p>
+
+<p><img src="https://i.imgur.com/XaxqEjB.png" alt="flower"/></p>
+
+<p>Raises <code><a href="../../Lime/Drawables/Pixels/Error.html">Error</a></code> when an invalid color character is found in <em>pixels</em>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L261" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -283,12 +345,12 @@
         <a class="method-permalink" href="#draw-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Inserts the image into the buffer.</p></div>
+        <div class="doc"><p>Inserts the pixels into the buffer.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L255" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L339" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -304,7 +366,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L209" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L209" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -317,15 +379,16 @@
         <a class="method-permalink" href="#map%28%26block%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Invokes the given block for each pixel of the image, replacing the pixel with the pixel returned by the block.</p>
+        <div class="doc"><p>Invokes the given block for each of the pixels, replacing the pixel with the pixel returned by the block.
+The block must return a <code>Tuple(UInt8, UInt8, UInt8)</code>.</p>
 
-<pre><code><span class="c"># Invert colors of the image:</span>
+<pre><code><span class="c"># Invert colors of an image:</span>
 image.map { <span class="o">|</span>pixel<span class="o">|</span> {<span class="n">255u8</span> <span class="o">-</span> pixel.red, <span class="n">255u8</span> <span class="o">-</span> pixel.green, <span class="n">255u8</span> <span class="o">-</span> pixel.blue} }</code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L244" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L328" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -341,7 +404,7 @@ image.map { <span class="o">|</span>pixel<span class="o">|</span> {<span class="
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L209" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L209" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -357,7 +420,7 @@ image.map { <span class="o">|</span>pixel<span class="o">|</span> {<span class="
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L208" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L208" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -373,7 +436,7 @@ image.map { <span class="o">|</span>pixel<span class="o">|</span> {<span class="
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L208" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L208" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -389,7 +452,7 @@ image.map { <span class="o">|</span>pixel<span class="o">|</span> {<span class="
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L208" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L208" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -405,7 +468,7 @@ image.map { <span class="o">|</span>pixel<span class="o">|</span> {<span class="
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L208" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L208" target="_blank">View source</a>]
         
       </div>
     </div>

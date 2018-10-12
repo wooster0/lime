@@ -61,8 +61,18 @@
       
     </li>
   
-  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Image" data-name="lime::drawables::image">
-      <a href="Lime/Drawables/Image.html">Image</a>
+  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels" data-name="lime::drawables::pixels">
+      <a href="Lime/Drawables/Pixels.html">Pixels</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels/Error" data-name="lime::drawables::pixels::error">
+      <a href="Lime/Drawables/Pixels/Error.html">Error</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -113,6 +123,17 @@
 
 
 
+  <h2>Overview</h2>
+
+  <p>The main module of lime.</p>
+
+<p>All x, y arguments are zero-based.</p>
+
+<p>Sometimes you may come across the terms "cell" and "pixel":</p>
+
+<ul><li>A "cell" refers to one place of a character on the console: <code>█</code>.</li><li>A "pixel" <strong>does not</strong> refer to a pixel of a display.
+  It refers to the <strong>half</strong> of a "cell": <code>▀</code>, <code>▄</code>.</li></ul>
+
 
 
 
@@ -136,21 +157,21 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/modules.cr#L1" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/modules.cr#L1" target="_blank">
         lime/modules.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L8" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L16" target="_blank">
         lime.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime/drawables.cr#L12" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L12" target="_blank">
         lime/drawables.cr
       </a>
     
@@ -178,7 +199,7 @@
       <li class="entry-summary">
         <a href="#check_key%3ASymbol%7CString%7CNil-instance-method" class="signature"><strong>#check_key</strong> : Symbol | String | Nil</a>
         
-          <div class="summary"><p>Checks if a key is pressed, if it is, returns - <code>:up</code> if up arrow has been pressed.</p></div>
+          <div class="summary"><p>Checks if a key is pressed.</p></div>
         
       </li>
     
@@ -206,7 +227,7 @@
       <li class="entry-summary">
         <a href="#get_key%3ASymbol%7CString-instance-method" class="signature"><strong>#get_key</strong> : Symbol | String</a>
         
-          <div class="summary"><p>Waits until a key has been pressed and returns - <code>:up</code> if up arrow has been pressed.</p></div>
+          <div class="summary"><p>Waits until a key has been pressed.</p></div>
         
       </li>
     
@@ -234,7 +255,7 @@
       <li class="entry-summary">
         <a href="#pixel%28x%3AInt32%2Cy%3AInt32%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method" class="signature"><strong>#pixel</strong>(x : Int32, y : Int32, color : Colorize::Color = <span class="t">Colorize</span><span class="t">::</span><span class="t">ColorANSI</span><span class="t">::</span><span class="t">Default</span>)</a>
         
-          <div class="summary"><p>Inserts a block (<code>▀</code>) at <em>x</em>, <em>y</em> with <em>color</em> into the buffer.</p></div>
+          <div class="summary"><p>Inserts a pixel at <em>x</em>, <em>y</em> with <em>color</em> into the buffer.</p></div>
         
       </li>
     
@@ -310,7 +331,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L170" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L180" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -323,7 +344,8 @@
         <a class="method-permalink" href="#check_key%3ASymbol%7CString%7CNil-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Checks if a key is pressed, if it is, returns</p>
+        <div class="doc"><p>Checks if a key is pressed.
+Returns</p>
 
 <ul><li><code>:up</code> if up arrow has been pressed.</li><li><code>:down</code> if down arrow has been pressed.</li><li><code>:left</code> if left arrow has been pressed.</li><li><code>:right</code> if right arrow has been pressed.</li><li><code>:enter</code> if enter has been pressed.</li><li><code>:tab</code> if tab has been pressed.</li><li><code>:backspace</code> if backspace has been pressed.</li><li><code>:escape</code> if escape has been pressed.</li><li><code>:ctrl_c</code> if Ctrl+C has been pressed.</li></ul>
 
@@ -334,7 +356,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -352,7 +374,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L87" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L97" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -370,7 +392,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L164" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L174" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -388,7 +410,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L184" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L194" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -401,7 +423,8 @@
         <a class="method-permalink" href="#get_key%3ASymbol%7CString-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Waits until a key has been pressed and returns</p>
+        <div class="doc"><p>Waits until a key has been pressed.
+Returns</p>
 
 <ul><li><code>:up</code> if up arrow has been pressed.</li><li><code>:down</code> if down arrow has been pressed.</li><li><code>:left</code> if left arrow has been pressed.</li><li><code>:right</code> if right arrow has been pressed.</li><li><code>:enter</code> if enter has been pressed.</li><li><code>:tab</code> if tab has been pressed.</li><li><code>:backspace</code> if backspace has been pressed.</li><li><code>:escape</code> if escape has been pressed.</li><li><code>:ctrl_c</code> if Ctrl+C has been pressed.</li></ul>
 
@@ -412,7 +435,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -432,7 +455,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L89" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -452,7 +475,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L291" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L301" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -468,16 +491,16 @@
         <div class="doc"><p>Like a game loop.
 The order is as follows:</p>
 
-<p><strong>1.</strong> Execute the given block.</p>
+<p><strong>1.</strong> Executes the given block.</p>
 
-<p><strong>2.</strong> Draw the buffer to the screen.</p>
+<p><strong>2.</strong> Draws the buffer to the screen.</p>
 
-<p><strong>3.</strong> Clear the buffer.</p></div>
+<p><strong>3.</strong> Clears the buffer.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L196" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L206" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -490,12 +513,12 @@ The order is as follows:</p>
         <a class="method-permalink" href="#pixel%28x%3AInt32%2Cy%3AInt32%2Ccolor%3AColorize%3A%3AColor%3DColorize%3A%3AColorANSI%3A%3ADefault%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Inserts a block (<code>▀</code>) at <em>x</em>, <em>y</em> with <em>color</em> into the buffer.</p></div>
+        <div class="doc"><p>Inserts a pixel at <em>x</em>, <em>y</em> with <em>color</em> into the buffer.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L205" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L215" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -513,7 +536,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L99" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L109" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -531,7 +554,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L104" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L114" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -549,7 +572,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L111" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L121" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -576,7 +599,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L137" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L147" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -603,7 +626,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L146" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L156" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -621,7 +644,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/c1ff8e8ab412d5dc7133d0d74832eb038a447b18/src/lime.cr#L179" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L189" target="_blank">View source</a>]
         
       </div>
     </div>
