@@ -7,8 +7,8 @@ A library for drawing graphics on the console screen
 ## Features
 
 * Drawing of
-  * text
   * PNG images
+  * text
   * rectangles
   * filled rectangles
   * circles
@@ -25,6 +25,8 @@ dependencies:
   lime:
     github: r00ster91/lime
 ```
+
+Then run `shards install`.
 
 ## Example
 

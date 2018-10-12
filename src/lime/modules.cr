@@ -3,26 +3,34 @@ module Lime
   module Window
     extend self
 
+    # :nodoc:
+    class_getter width_cells : Int32 = `tput cols`.to_i
+
+    # :nodoc:
+    class_getter height_cells : Int32 = `tput lines`.to_i
+
     # Returns the width of the window in cells.
-    class_getter width : Int32 = `tput cols`.to_i
+    class_getter width : Int32 = @@width_cells - 1
 
     # Returns the height of the window in cells.
-    class_getter height : Int32 = `tput lines`.to_i
+    class_getter height : Int32 = @@height_cells - 1
 
-    # Returns the width of the window in blocks.
-    def self.width_blocks
+    # Returns the width of the window in pixels.
+    def self.width_pixels
       @@width
     end
 
-    # Returns the height of the window in blocks.
-    class_getter height_blocks : Int32 = height*2
+    # Returns the height of the window in pixels.
+    class_getter height_pixels : Int32 = height*2
 
     # Updates the values of `width`, `height` and
-    # `width_blocks`, `height_blocks`.
+    # `width_pixels`, `height_pixels`.
     def update
-      @@width = `tput cols`.to_i
-      @@height = `tput lines`.to_i
-      @@height_blocks = @@height*2
+      @@width_cells = `tput cols`.to_i
+      @@height_cells = `tput lines`.to_i
+      @@width = @@width_cells - 1
+      @@height = @@height_cells - 1
+      @@height_pixels = @@height*2
     end
 
     # Sets the title of the window to *title*.

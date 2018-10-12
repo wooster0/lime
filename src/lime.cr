@@ -5,10 +5,18 @@ struct Colorize::Object
   getter fore, back
 end
 
+# The main module of lime.
+#
+# All x, y arguments are zero-based.
+#
+# Sometimes you may come across the terms "cell" and "pixel":
+# * A "cell" refers to one place of a character on the console: `█`.
+# * A "pixel" **does not** refer to a pixel of a display.
+#   It refers to the **half** of a "cell": `▀`, `▄`.
 module Lime
   extend self
 
-  @@empty_buffer = Array(Char | Colorize::Object(Char)).new(Window.width*Window.height) { ' ' }
+  @@empty_buffer = Array(Char | Colorize::Object(Char)).new(Window.width_cells*Window.height_cells) { ' ' }
   @@buffer : Array(Char | Colorize::Object(Char)) = @@empty_buffer.dup
 
   private KEYS = {
@@ -46,7 +54,8 @@ module Lime
   KEY_BODY
 
   {% begin %}
-    # Waits until a key has been pressed and returns
+    # Waits until a key has been pressed.
+    # Returns
     {% for value in KEYS %}
     # - `{{value[0]}}` if {{value[1].id}} has been pressed.
     {% end %}
@@ -59,7 +68,8 @@ module Lime
       {{KEY_BODY.id}}
     end
 
-    # Checks if a key is pressed, if it is, returns
+    # Checks if a key is pressed.
+    # Returns
     {% for value in KEYS %}
     # - `{{value[0]}}` if {{value[1].id}} has been pressed.
     {% end %}
@@ -97,13 +107,13 @@ module Lime
 
   # Inserts *char* into the buffer at *x*, *y*.
   def print(char : Char | Colorize::Object(Char), x : Int32, y : Int32)
-    @@buffer[x + Window.width * y] = char
+    @@buffer[x + Window.width_cells * y] = char
   end
 
   # Inserts *string* into the buffer at *x*, *y*.
   def print(string : String, x : Int32, y : Int32)
     string.each_char_with_index do |char, i|
-      @@buffer[x + i + Window.width * y] = char
+      @@buffer[x + i + Window.width_cells * y] = char
     end
   end
 
@@ -117,7 +127,7 @@ module Lime
     else
       string = string[string.index('m').not_nil! + 1..string.rindex('\e').not_nil! - 1]
       string.each_char_with_index do |char, i|
-        @@buffer[x + i + (y*Window.width)] = char.colorize.fore(fore).back(back)
+        @@buffer[x + i + (y*Window.width_cells)] = char.colorize.fore(fore).back(back)
       end
     end
   end
@@ -188,11 +198,11 @@ module Lime
   # Like a game loop.
   # The order is as follows:
   #
-  # **1.** Execute the given block.
+  # **1.** Executes the given block.
   #
-  # **2.** Draw the buffer to the screen.
+  # **2.** Draws the buffer to the screen.
   #
-  # **3.** Clear the buffer.
+  # **3.** Clears the buffer.
   def loop
     ::loop do
       yield
@@ -201,9 +211,9 @@ module Lime
     end
   end
 
-  # Inserts a block (`▀`) at *x*, *y* with *color* into the buffer.
+  # Inserts a pixel at *x*, *y* with *color* into the buffer.
   def pixel(x : Int32, y : Int32, color : Colorize::Color = Colorize::ColorANSI::Default)
-    position = x + (y/2)*Window.width
+    position = x + (y/2)*Window.width_cells
 
     if color == Colorize::ColorANSI::Default
       default_pixel(position, y)

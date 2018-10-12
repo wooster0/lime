@@ -204,46 +204,130 @@ module Lime
       end
     end
 
-    struct Image
+    struct Pixels
       property x, y
       getter width : Int32, height : Int32
 
-      @canvas : StumpyPNG::Canvas
+      # Raised when an invalid color character is found in a pixel string.
+      class Error < Exception
+      end
 
-      # Initializes a new `Image`.
+      @pixels = [] of Colorize::ColorRGB | Colorize::ColorANSI | Symbol
+
+      # Initializes new `Pixels` from an image.
       #
       # *path* must lead to an PNG encoded image.
       def initialize(path : String, @x : Int32, @y : Int32)
-        @canvas = StumpyPNG.read(path)
-        @width, @height = @canvas.width, @canvas.height
-        @image = [] of Colorize::ColorRGB | Symbol
+        canvas = StumpyPNG.read(path)
+        @width, @height = canvas.width, canvas.height
 
         i = 1
-        @canvas.pixels.each do |pixel|
+        canvas.pixels.each do |pixel|
           color = Colorize::ColorRGB.new(*pixel.to_rgb8)
 
           if pixel.alpha == 0
-            @image << :skip
+            @pixels << :skip
           else
-            @image << color
+            @pixels << color
           end
           if i == @width
-            @image << :newline
+            @pixels << :newline
             i = 0
           end
           i += 1
         end
-        @image.pop
+        @pixels.pop
       end
 
-      # Invokes the given block for each pixel of the image, replacing the pixel with the pixel returned by the block.
+      private COLOR_CHARACTERS = {
+        {'1', "default"},
+        {'0', "black"},
+        {'9', "dark_gray"},
+        {'6', "light_gray"},
+        {'r', "red"},
+        {'g', "green"},
+        {'b', "blue"},
+        {'y', "yellow"},
+        {'m', "magenta"},
+        {'c', "cyan"},
+        {'R', "light_red"},
+        {'G', "light_green"},
+        {'B', "light_blue"},
+        {'Y', "light_yellow"},
+        {'M', "light_magenta"},
+        {'C', "light_cyan"},
+      }
+
+      {% begin %}
+        # Initializes new `Pixels` from a string.
+        #
+        # Iterates through every character of *pixels* and every time a color character
+        # is found, it's replaced with its color.
+        #
+        # Available color characters are:
+        {% for char in COLOR_CHARACTERS %}
+        # * `'{{char[0].id}}'`: {{char[1].gsub(/_/, " ").id}}
+        {% end %}
+        #
+        # Comments are also allowed in the string.
+        #
+        # Example:
+        #
+        # ```
+        # # A flower:
+        #  RRR
+        # RYYYR # Head
+        #  RRR
+        #   g
+        # G g G
+        # GGgGG # Stem
+        #  GgG
+        #   g
+        # ```
+        #
+        # becomes:
+        #
+        # ![flower](https://i.imgur.com/XaxqEjB.png)
+        #
+        # Raises `Error` when an invalid color character is found in *pixels*.
+        def initialize(@x : Int32, @y : Int32, pixels : String)
+          # Remove comments
+          lines = pixels.lines.map do |line|
+            next "" if line[0] == '#'
+
+            line[0..(line.index('#') || 0)-1]
+          end
+
+          @width = lines.max_by { |line| line.size }.size
+          @height = lines.size
+          pixels = lines.join('\n')
+
+          pixels.each_char do |char|
+            @pixels << (case char
+            when '\n'
+              :newline
+            when .whitespace?
+              :skip
+            {% for char in COLOR_CHARACTERS %}
+            when {{char[0]}} then Colorize::ColorANSI::{{char[1].camelcase.id}}
+            {% end %}
+            else
+              raise Error.new("Invalid color character: #{char}")
+            end)
+          end
+        end
+      {% end %}
+
+      # Invokes the given block for each of the pixels, replacing the pixel with the pixel returned by the block.
+      # The block must return a `Tuple(UInt8, UInt8, UInt8)`.
+      #
       # ```
-      # # Invert colors of the image:
+      # # Invert colors of an image:
       # image.map { |pixel| {255u8 - pixel.red, 255u8 - pixel.green, 255u8 - pixel.blue} }
       # ```
       def map
-        @image.map! do |pixel|
-          if pixel.is_a?(Colorize::ColorRGB)
+        @pixels.map! do |pixel|
+          if pixel.is_a?(Colorize::ColorRGB | Colorize::ColorANSI)
             Colorize::ColorRGB.new(*yield pixel)
           else
             pixel
@@ -251,10 +335,10 @@ module Lime
         end
       end
 
-      # Inserts the image into the buffer.
+      # Inserts the pixels into the buffer.
       def draw
         x, y = 0, 0
-        @image.each do |pixel|
+        @pixels.each do |pixel|
           case pixel
           when :newline
             y += 1
@@ -262,7 +346,7 @@ module Lime
           when :skip
             x += 1
           else
-            Lime.pixel(@x + x, @y + y, pixel.as(Colorize::ColorRGB))
+            Lime.pixel(@x + x, @y + y, pixel.as(Colorize::ColorRGB | Colorize::ColorANSI))
             x += 1
           end
         end
