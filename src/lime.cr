@@ -96,7 +96,7 @@ module Lime
   # Checks if a key is pressed, if it is, returns it, otherwise returns `nil`.
   def check_key_raw : String?
     STDIN.raw do |io|
-      io.read_timeout = 0.1
+      io.read_timeout = 0.01
       buffer = Bytes.new(3)
       String.new(buffer[0, io.read(buffer)])
     rescue IO::Timeout

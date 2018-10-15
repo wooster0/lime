@@ -27,6 +27,7 @@ CC CCCC CC
  CCC  CCC
 VIRIDIAN
 
+# Convert the color characters to pixels:
 viridian = Pixels.new(5, 5, VIRIDIAN)
 
 # Insert Viridian into the buffer:

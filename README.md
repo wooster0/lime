@@ -100,9 +100,11 @@ See [`examples/`](https://github.com/r00ster91/lime/tree/master/examples) for mo
 
 1. Fork it (<https://github.com/r00ster91/lime/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+3. Make your changes
+4. Make sure the specs compile (`crystal spec -v`)
+5. Commit your changes (`git commit -am 'Add some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create a new Pull Request
 
 ## Contributors
 

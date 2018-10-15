@@ -76,7 +76,11 @@ module Lime
         elsif @height == 1
           @top, @tile, @bottom = "", ("█"*@width).colorize(color), ""
           {{yield}}
+        elsif @width == 0 || @height == 0
+          @top, @tile, @bottom = "", "", ""
+          {{yield}}
         else
+          @width -= 2 unless @width == 0
           case @type
           when .default?
             middle = "─"*@width
@@ -109,15 +113,15 @@ module Lime
       # you can use the Top Level Namespace constants
       # **Default**, **Double** and **Round**.
       def initialize(@x : Int32, @y : Int32, @width : Int32, @height : Int32, @type : Type = Default, @color : Colorize::Color = Colorize::ColorANSI::Default)
-        @width -= 2
         init { @y -= 1 }
+        @height -= 1 unless @height == 1
       end
 
       # Inserts the rectangle into the buffer.
       def draw
         Lime.print(@top, @x, @y)
         i = 0
-        (@height - 1).times do
+        @height.times do
           i += 1
           Lime.print(@tile, @x, @y + i)
         end
@@ -153,43 +157,47 @@ module Lime
     end
 
     struct Circle
-      getter x, y, radius
+      getter x, y, radius, color
 
       def radius=(@radius)
-        @radius -= 1
+        @internal_radius = @radius - 1
       end
 
       def x=(@x)
-        @x += @radius
+        @internal_x = @x + @radius
       end
 
       def y=(@y)
-        @y += @radius
+        @internal_y = @y + @radius
       end
+
+      @internal_x : Int32
+      @internal_y : Int32
+      @internal_radius : Int32
 
       # Initializes a new `Circle`.
       def initialize(@x : Int32, @y : Int32, @radius : Int32, @color : Colorize::Color = Colorize::ColorANSI::Default)
-        @radius -= 1
-        @x += @radius
-        @y += @radius
+        @internal_radius = @radius - 1
+        @internal_x = @x + @radius
+        @internal_y = @y + @radius
       end
 
       # Inserts the circle into the buffer.
       #
       # This method uses the [midpoint circle algorithm](https://en.wikipedia.org/wiki/Midpoint_circle_algorithm).
       def draw
-        x1 = @radius
+        x1 = @internal_radius
         y1 = 0
-        err = -@radius
+        err = -@internal_radius
         while x1 >= y1
-          Lime.pixel(@x + x1, @y + y1, @color)
-          Lime.pixel(@x + y1, @y + x1, @color)
-          Lime.pixel(@x - y1, @y + x1, @color)
-          Lime.pixel(@x - x1, @y + y1, @color)
-          Lime.pixel(@x - x1, @y - y1, @color)
-          Lime.pixel(@x - y1, @y - x1, @color)
-          Lime.pixel(@x + y1, @y - x1, @color)
-          Lime.pixel(@x + x1, @y - y1, @color)
+          Lime.pixel(@internal_x + x1, @internal_y + y1, @color)
+          Lime.pixel(@internal_x + y1, @internal_y + x1, @color)
+          Lime.pixel(@internal_x - y1, @internal_y + x1, @color)
+          Lime.pixel(@internal_x - x1, @internal_y + y1, @color)
+          Lime.pixel(@internal_x - x1, @internal_y - y1, @color)
+          Lime.pixel(@internal_x - y1, @internal_y - x1, @color)
+          Lime.pixel(@internal_x + y1, @internal_y - x1, @color)
+          Lime.pixel(@internal_x + x1, @internal_y - y1, @color)
 
           if err <= 0
             y1 += 1
@@ -244,6 +252,7 @@ module Lime
         {'0', "black"},
         {'9', "dark_gray"},
         {'6', "light_gray"},
+        {'w', "white"},
         {'r', "red"},
         {'g', "green"},
         {'b', "blue"},
@@ -261,7 +270,7 @@ module Lime
       {% begin %}
         # Initializes new `Pixels` from a string.
         #
-        # Iterates through every character of *pixels* and every time a color character
+        # Iterates through every character of *color_characters* and every time a color character
         # is found, it's replaced with its color.
         #
         # Available color characters are:
@@ -289,10 +298,10 @@ module Lime
         #
         # ![flower](https://i.imgur.com/XaxqEjB.png)
         #
-        # Raises `Error` when an invalid color character is found in *pixels*.
-        def initialize(@x : Int32, @y : Int32, pixels : String)
+        # Raises `Error` when an invalid color character is found in *color_characters*.
+        def initialize(@x : Int32, @y : Int32, color_characters : String)
           # Remove comments
-          lines = pixels.lines.map do |line|
+          lines = color_characters.lines.map do |line|
             next "" if line[0] == '#'
 
             line[0..(line.index('#') || 0)-1]
@@ -300,9 +309,9 @@ module Lime
 
           @width = lines.max_by { |line| line.size }.size
           @height = lines.size
-          pixels = lines.join('\n')
+          color_characters = lines.join('\n')
 
-          pixels.each_char do |char|
+          color_characters.each_char do |char|
             @pixels << (case char
             when '\n'
               :newline
@@ -327,7 +336,7 @@ module Lime
       # ```
       def map
         @pixels.map! do |pixel|
-          if pixel.is_a?(Colorize::ColorRGB | Colorize::ColorANSI)
+          if pixel.is_a?(Colorize::ColorRGB)
             Colorize::ColorRGB.new(*yield pixel)
           else
             pixel
