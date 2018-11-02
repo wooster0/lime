@@ -1,24 +1,16 @@
 require "stumpy_png"
 
-# See: `Lime::Drawables::Rectangle::Type::Default`.
-Default = Lime::Drawables::Rectangle::Type::Default
-
-# See: `Lime::Drawables::Rectangle::Type::Double`.
-Double = Lime::Drawables::Rectangle::Type::Double
-
-# See: `Lime::Drawables::Rectangle::Type::Round`.
-Round = Lime::Drawables::Rectangle::Type::Round
-
 module Lime
   # This module contains drawables that can be inserted into the buffer.
   #
   # If you want to use the drawables in the Top Level Namespace,
-  # you can `include` it:
+  # you can `include` them:
   # ```
   # require "lime/drawables"
   # include Lime::Drawables
   # ```
   module Drawables
+    # A drawable rectangle.
     struct Rectangle
       property x, y
       getter width, type, color
@@ -101,7 +93,8 @@ module Lime
         end
       end
 
-      # TODO: use ` instead of ** at the Top Level Namespace constants after
+      # TODO: use ` instead of ** at the Top Level Namespace constants in the
+      # `initialize` description after
       # https://github.com/crystal-lang/crystal/issues/6637 is fixed.
       #
       # Currently when using ` instead of **, the constants are clickable and
@@ -129,6 +122,7 @@ module Lime
       end
     end
 
+    # A drawable filled rectangle.
     struct FilledRectangle
       property x, y, height
       getter width, material, color
@@ -156,6 +150,7 @@ module Lime
       end
     end
 
+    # A drawable circle.
     struct Circle
       getter x, y, radius, color
 
@@ -212,6 +207,7 @@ module Lime
       end
     end
 
+    # A drawable sequence of pixels.
     struct Pixels
       property x, y
       getter width : Int32, height : Int32
@@ -300,7 +296,7 @@ module Lime
         #
         # Raises `Error` when an invalid color character is found in *color_characters*.
         def initialize(@x : Int32, @y : Int32, color_characters : String)
-          # Remove comments
+          # Remove comments:
           lines = color_characters.lines.map do |line|
             next "" if line[0] == '#'
 
@@ -363,3 +359,12 @@ module Lime
     end
   end
 end
+
+# Alias for the default rectangle type: `Lime::Drawables::Rectangle::Type::Default`.
+Default = Lime::Drawables::Rectangle::Type::Default
+
+# Alias for the double rectangle type: `Lime::Drawables::Rectangle::Type::Double`.
+Double = Lime::Drawables::Rectangle::Type::Double
+
+# Alias for the round rectangle type: `Lime::Drawables::Rectangle::Type::Round`.
+Round = Lime::Drawables::Rectangle::Type::Round

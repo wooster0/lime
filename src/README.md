@@ -1,4 +1,4 @@
-# How does it work exactly?
+# How it works exactly
 
 So first, after you required lime, two buffers will be automatically created. The first one is an array of spaces. The size is determined by the window width in cells multiplied by the window height in cells. The second buffer is just a shallow copy of the first buffer.
 Internally they are called the `empty_buffer` and the `buffer`.

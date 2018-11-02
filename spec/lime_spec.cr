@@ -3,12 +3,12 @@ require "../src/lime"
 
 describe Lime do
   describe ".print" do
-    it "prints a char" do
+    it "prints a character" do
       Lime.print('c', 1, 1)
       buffer.should eq("\n c")
     end
 
-    it "prints a colored char" do
+    it "prints a colored character" do
       Lime.print('c'.colorize(:green), 1, 1)
       buffer.should eq("\n \e[32mc\e[0m")
     end
@@ -49,7 +49,7 @@ describe Lime do
   end
 
   describe ".pixel" do
-    it "inserts a pixel into the buffer" do
+    it "inserts colored pixels into the buffer" do
       Lime.pixel(1, 1, :red)
       buffer.should eq(" \e[31m▄\e[0m")
 
@@ -61,7 +61,7 @@ describe Lime do
       buffer.should eq(" \e[33;45m▄\e[0m")
     end
 
-    it "inserts a default pixel into the buffer" do
+    it "inserts default pixels into the buffer" do
       Lime.pixel(1, 1, Colorize::ColorANSI::Default)
       buffer.should eq(" ▄")
 
@@ -75,7 +75,7 @@ describe Lime do
   end
 
   describe ".line" do
-    it "inserts a line into the buffer" do
+    it "inserts a colored line into the buffer" do
       Lime.line(1, 1, 5, 5, :green)
       buffer.should eq(
         <<-LINE
@@ -84,7 +84,9 @@ describe Lime do
                                        \e[32m▀\e[0m\e[32m▄\e[0m
         LINE
       )
+    end
 
+    it "inserts a default line into the buffer" do
       Lime.line(0, 0, 10, 5, Colorize::ColorANSI::Default)
       buffer.should eq(
         <<-LINE
@@ -96,9 +98,15 @@ describe Lime do
     end
   end
 
-  describe ".check_key" do
-    it "checks for a key" do
-      Lime.check_key.should eq(nil)
+  describe ".peek_key_raw" do
+    it "returns nil if no key has been pressed" do
+      Lime.peek_key.should eq(nil)
+    end
+  end
+
+  describe ".peek_key" do
+    it "returns nil if no key has been pressed" do
+      Lime.peek_key.should eq(nil)
     end
   end
 end

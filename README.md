@@ -14,7 +14,10 @@ A library for drawing graphics on the console screen
   * circles
   * lines
 * Non-blocking key input
-* Management of the window and cursor
+* Management of the
+  * window
+  * cursor
+  * mouse pointer
 
 ## Installation
 

@@ -130,7 +130,7 @@ describe Pixels do
     end
 
     it "raises when there's an invalid color character" do
-      expect_raises(Pixels::Error, "Invalid color char") do
+      expect_raises(Pixels::Error, "Invalid color character") do
         pixels = Pixels.new(5, 5, "I")
       end
     end
@@ -164,42 +164,7 @@ describe Pixels do
     end
   end
 
-  describe ".draw" do
-    it "draws an image" do
-      image_path = "#{Dir.open("spec").path}/image.png"
-      image = Pixels.new(image_path, 5, 5)
-      image.draw
-      buffer.should eq(
-        <<-IMAGE
-
-
-             \e[38;2;237;28;36m▄\e[0m\e[38;2;0;255;0m▄\e[0m\e[38;2;0;0;255m▄\e[0m
-                                                                        \e[38;2;0;255;0;48;2;0;0;255m▀\e[0m\e[38;2;237;28;36;48;2;0;255;0m▀\e[0m\e[38;2;0;255;0;48;2;237;28;36m▀\e[0m
-        IMAGE
-      )
-    end
-
-    it "draws color characters" do
-      pixels = Pixels.new(5, 5,
-        <<-COLOR_CHARACTERS
-        R G B
-        G R G
-        B G R
-        COLOR_CHARACTERS
-      )
-      pixels.draw
-      buffer.should eq(
-        <<-PIXELS
-
-
-             \e[91m▄\e[0m \e[92m▄\e[0m \e[94m▄\e[0m
-                                        \e[92;104m▀\e[0m \e[91;102m▀\e[0m \e[92;101m▀\e[0m
-        PIXELS
-      )
-    end
-  end
-
-  describe ".map" do
+  describe "#map" do
     it "modifies an image" do
       image_path = "#{Dir.open("spec").path}/image.png"
       image = Pixels.new(image_path, 5, 5)
@@ -235,6 +200,41 @@ describe Pixels do
          Colorize::ColorANSI::LightBlue, :skip,
          Colorize::ColorANSI::LightGreen, :skip,
          Colorize::ColorANSI::LightRed]
+      )
+    end
+  end
+
+  describe "#draw" do
+    it "draws an image" do
+      image_path = "#{Dir.open("spec").path}/image.png"
+      image = Pixels.new(image_path, 5, 5)
+      image.draw
+      buffer.should eq(
+        <<-IMAGE
+
+
+             \e[38;2;237;28;36m▄\e[0m\e[38;2;0;255;0m▄\e[0m\e[38;2;0;0;255m▄\e[0m
+                                                                        \e[38;2;0;255;0;48;2;0;0;255m▀\e[0m\e[38;2;237;28;36;48;2;0;255;0m▀\e[0m\e[38;2;0;255;0;48;2;237;28;36m▀\e[0m
+        IMAGE
+      )
+    end
+
+    it "draws color characters" do
+      pixels = Pixels.new(5, 5,
+        <<-COLOR_CHARACTERS
+        R G B
+        G R G
+        B G R
+        COLOR_CHARACTERS
+      )
+      pixels.draw
+      buffer.should eq(
+        <<-PIXELS
+
+
+             \e[91m▄\e[0m \e[92m▄\e[0m \e[94m▄\e[0m
+                                        \e[92;104m▀\e[0m \e[91;102m▀\e[0m \e[92;101m▀\e[0m
+        PIXELS
       )
     end
   end

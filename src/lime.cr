@@ -12,12 +12,33 @@ end
 # Sometimes you may come across the terms "cell" and "pixel":
 # * A "cell" refers to one place of a character on the console: `█`.
 # * A "pixel" **does not** refer to a pixel of a display.
-#   It refers to the **half** of a "cell": `▀`, `▄`.
+#   It refers to the **half** of a "cell": `▀`, `▄` (also called a "half block").
 module Lime
   extend self
 
   @@empty_buffer = Array(Char | Colorize::Object(Char)).new(Window.width_cells*Window.height_cells) { ' ' }
   @@buffer : Array(Char | Colorize::Object(Char)) = @@empty_buffer.dup
+
+  # Waits until a key has been pressed and returns it.
+  #
+  # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
+  def get_key_raw : String
+    STDIN.raw do |io|
+      buffer = Bytes.new(3)
+      String.new(buffer[0, io.read(buffer)])
+    end
+  end
+
+  # Returns the key that is down in the moment this method is called or `nil` if no key is down.
+  #
+  # NOTE: If the key combination that is down is Ctrl+C, it's caught by this method and will not be handled by the system.
+  def peek_key_raw : String?
+    STDIN.read_timeout = 0.01
+    get_key_raw
+  rescue IO::Timeout
+  ensure
+    STDIN.read_timeout = nil
+  end
 
   private KEYS = {
     {:up, "up arrow"}, {:down, "down arrow"},
@@ -54,13 +75,13 @@ module Lime
   KEY_BODY
 
   {% begin %}
-    # Waits until a key has been pressed.
-    # Returns
+    # Waits until a key has been pressed and returns it compactly as a symbol.
+    #
     {% for value in KEYS %}
-    # - `{{value[0]}}` if {{value[1].id}} has been pressed.
+    # * `{{value[0]}}` if {{value[1].id}} has been pressed.
     {% end %}
     #
-    # If none of the above keys are pressed, the key is returned as is.
+    # If none of the above keys are pressed, the key is returned as-is.
     #
     # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
     def get_key : Symbol | String
@@ -68,42 +89,20 @@ module Lime
       {{KEY_BODY.id}}
     end
 
-    # Checks if a key is pressed.
-    # Returns
+    # Returns the key that is down in the moment this method is called compactly as a symbol or `nil` if no key is down.
+    #
     {% for value in KEYS %}
-    # - `{{value[0]}}` if {{value[1].id}} has been pressed.
+    # * `{{value[0]}}` if {{value[1].id}} is down.
     {% end %}
     #
-    # If none of the above keys are pressed, the key is returned as is.
+    # If none of the above keys are down, the key is returned as-is.
     #
-    # If no key is pressed, returns `nil`.
-    def check_key : Symbol | String | Nil
-      case key = check_key_raw
+    # NOTE: If the key combination that is down is Ctrl+C, it's caught by this method and will not be handled by the system.
+    def peek_key : Symbol | String | Nil
+      case key = peek_key_raw
       {{KEY_BODY.id}}
     end
   {% end %}
-
-  # Waits until a key has been pressed and returns it.
-  #
-  # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
-  def get_key_raw : String
-    STDIN.raw do |io|
-      buffer = Bytes.new(3)
-      String.new(buffer[0, io.read(buffer)])
-    end
-  end
-
-  # Checks if a key is pressed, if it is, returns it, otherwise returns `nil`.
-  def check_key_raw : String?
-    STDIN.raw do |io|
-      io.read_timeout = 0.01
-      buffer = Bytes.new(3)
-      String.new(buffer[0, io.read(buffer)])
-    rescue IO::Timeout
-    ensure
-      io.read_timeout = nil
-    end
-  end
 
   # Inserts *char* into the buffer at *x*, *y*.
   def print(char : Char | Colorize::Object(Char), x : Int32, y : Int32)
@@ -113,7 +112,7 @@ module Lime
   # Inserts *string* into the buffer at *x*, *y*.
   def print(string : String, x : Int32, y : Int32)
     string.each_char_with_index do |char, i|
-      @@buffer[x + i + Window.width_cells * y] = char
+      print(char, x + i, y)
     end
   end
 

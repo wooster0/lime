@@ -9,7 +9,7 @@ class String
     end
   end
 
-  # Cuts `self` to multiple pieces of size *size* and returns them:
+  # Cuts `self` to multiple pieces of size *size* and returns them.
   #
   # ```
   # "hello world".pieces(2) # => ["he", "ll", "o ", "wo", "rl", "d"]
