@@ -91,11 +91,11 @@ module Lime
     class_getter extended = false
 
     # Returns the current mouse event report mode.
-    class_getter mode : Mode = Mouse::Mode::Click
+    class_getter mode : Mode = Mouse::Mode::Off
 
     # The mouse event report mode.
     #
-    # The default mode is `Click`.
+    # The default mode is `Off`.
     enum Mode
       # Reports only mouse click events.
       Click
@@ -105,6 +105,9 @@ module Lime
 
       # Reports all mouse events: movements, clicks and drags.
       All
+
+      # Reports no mouse events.
+      Off
     end
 
     # Sets the mouse event report mode to *mode*.
@@ -112,17 +115,30 @@ module Lime
       case mode
       when .click?
         print "\e[?1000h"
-        at_exit { print "\e[?1000l" }
       when .drag?
         print "\e[?1002h"
-        at_exit { print "\e[?1002l" }
       when .all?
         print "\e[?1003h"
-        at_exit { print "\e[?1003l" }
+      when .off?
+        off
       end
     end
 
-    Mouse.mode = Mouse::Mode::Click
+    private def off
+      case mode
+      when .click?
+        print "\e[?1000l"
+      when .drag?
+        print "\e[?1002l"
+      when .all?
+        print "\e[?1003l"
+      end
+    end
+
+    at_exit do
+      off
+      print "\e[?1006l" if @@extended
+    end
 
     # Extends the mouse event report range if *bool* is `true`, otherwise resets the range.
     #
@@ -132,7 +148,6 @@ module Lime
     def extend(bool = true) # The argument can't be named `extend` since it's a keyword
       if bool
         print "\e[?1006h"
-        at_exit { print "\e[?1006l" }
         @@extended = true
       else
         print "\e[?1006l"
@@ -185,8 +200,11 @@ module Lime
       end
     end
 
-    # Waits for input and returns `Event` if the input is a valid mouse event, otherwise returns `nil`.
+    # Waits for input and returns `Event` if the input is a mouse event,
+    # `nil` if the input is not a mouse event or if `mode` is `Off`.
     def get : Event?
+      return nil if mode.off?
+
       return get_1006 if @@extended
 
       input = STDIN.raw do |io|
@@ -214,7 +232,8 @@ module Lime
       Event.new(input[4].ord - 33, input[5].ord - 33, type)
     end
 
-    # Returns the mouse event happening in the moment this method is called as `Event`, or `nil` if no event happened.
+    # Returns the mouse event happening in the moment this method is called as `Event`,
+    # `nil` if the input is not a mouse event or if `mode` is `Off`.
     def peek : Event?
       STDIN.read_timeout = 0.01
       get
