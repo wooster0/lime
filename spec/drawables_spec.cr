@@ -149,7 +149,7 @@ describe Pixels do
     end
 
     it "initializes an image" do
-      image_path = "#{Dir.open("spec").path}/image.png"
+      image_path = "#{__DIR__}/image.png"
       image = Pixels.new(image_path, 0, 0)
       image.@pixels.should eq(
         [Colorize::ColorRGB.new(237_u8, 28_u8, 36_u8),
@@ -166,7 +166,7 @@ describe Pixels do
 
   describe "#map" do
     it "modifies an image" do
-      image_path = "#{Dir.open("spec").path}/image.png"
+      image_path = "#{__DIR__}/image.png"
       image = Pixels.new(image_path, 5, 5)
       image.map { |pixel| {255u8 - pixel.red, 255u8 - pixel.green, 255u8 - pixel.blue} }
       image.@pixels.should eq(
@@ -206,7 +206,7 @@ describe Pixels do
 
   describe "#draw" do
     it "draws an image" do
-      image_path = "#{Dir.open("spec").path}/image.png"
+      image_path = "#{__DIR__}/image.png"
       image = Pixels.new(image_path, 5, 5)
       image.draw
       buffer.should eq(

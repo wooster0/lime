@@ -16,5 +16,5 @@ rectangle3.draw
 filled_rectangle.draw
 circle.draw
 
-# Draw the buffer on the screen:
+# Draw the content of the buffer to the screen:
 Lime.draw

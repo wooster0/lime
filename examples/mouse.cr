@@ -11,11 +11,11 @@ def collision?(event, hitbox)
 end
 
 record Hitbox, x : Int32, y : Int32 do
-  getter height = 2
-  getter width = 3
+  getter height = 2, width = 3
   setter x, y
 end
 
+# A random position for the target and its hitbox
 x, y = rand(1..20), rand(10)
 target = Rectangle.new(x, y, 3, 2, Round, :white)
 hitbox = Hitbox.new(x, y)
@@ -23,10 +23,10 @@ hitbox = Hitbox.new(x, y)
 puts "Press any mouse button to start"
 
 loop do
-  # Wait for an event
+  # Wait for an event:
   event = Lime::Mouse.get
 
-  # Exit if the event is not a mouse event
+  # Exit if the event is not a mouse event:
   exit if event.nil?
 
   # Place the target at a new random position if the target has been hit:

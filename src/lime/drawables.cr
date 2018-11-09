@@ -102,8 +102,7 @@ module Lime
 
       # Initializes a new `Rectangle`.
       #
-      # For specifying the type of a `Rectangle`,
-      # you can use the Top Level Namespace constants
+      # For specifying the type, you can use the Top Level Namespace constants
       # **Default**, **Double** and **Round**.
       def initialize(@x : Int32, @y : Int32, @width : Int32, @height : Int32, @type : Type = Default, @color : Colorize::Color = Colorize::ColorANSI::Default)
         init { @y -= 1 }
@@ -138,6 +137,19 @@ module Lime
       @tile : Colorize::Object(String)
 
       # Initializes a new `FilledRectangle`.
+      #
+      # *material* is what the filled rectangle will be built with:
+      # ```
+      # FilledRectangle.new(0, 0, 5, 5, "#").draw
+      # ```
+      #
+      # ````text
+      # #####
+      # #####
+      # #####
+      # #####
+      # #####
+      # ```
       def initialize(@x : Int32, @y : Int32, @width : Int32, @height : Int32, @material : String = "█", @color : Colorize::Color = Colorize::ColorANSI::Default)
         @tile = (@material*@width).colorize(@color)
       end
@@ -276,7 +288,7 @@ module Lime
         #
         # Comments are also allowed in the string.
         #
-        # Example:
+        # Example string:
         #
         # ```
         # # A flower:
@@ -325,7 +337,6 @@ module Lime
 
       # Invokes the given block for each of the pixels, replacing the pixel with the pixel returned by the block.
       # The block must return a `Tuple(UInt8, UInt8, UInt8)`.
-      #
       # ```
       # # Invert colors of an image:
       # image.map { |pixel| {255u8 - pixel.red, 255u8 - pixel.green, 255u8 - pixel.blue} }

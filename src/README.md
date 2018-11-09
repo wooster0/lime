@@ -9,7 +9,7 @@ So let's say we want to print a single `a` character at the x-axis **5** and at 
 Lime.print('a', 5, 10)
 ```
 
-now the buffer will be accessed and the `a` will be inserted into the buffer at a specific index. The formula for calculating the correct index is:
+now the buffer will be accessed and the `a` will be inserted into it at a specific index. The formula for calculating the correct index is:
 
 ```crystal
 x-axis + window width * y-axis
@@ -25,6 +25,6 @@ so the result is:
 
 which means that the **1685**th empty space in the buffer will be replaced by an `a`. But this isn't enough yet to see the `a` on the screen!
 
-The next step is to call `Lime.draw` which iterates through every character in the buffer and builds one big string which is then being printed. That's of course much faster than printing every character seperately.
+The next step is to call `Lime.draw` which iterates through every single character in the buffer and builds one big string which is then being printed. That's of course much faster than printing every character seperately.
 
-Usually if you use `Lime.draw` in a loop, you put a `Lime.clear` after it which clears the buffer so you have room for drawing new stuff. And that's where the empty buffer that has been created at the beginning comes into play: instead of rebuilding the whole buffer every time again, we simply shallow-copy the empty buffer and assign it to the normal buffer.
+Usually if you use `Lime.draw` in a loop, you put a `Lime.clear` after it which clears the buffer so you have room for drawing new stuff. And that's where the empty buffer that has been created at the beginning comes into play: instead of rebuilding the whole buffer every time again, we simply shallow-copy the empty buffer and assign it to the normal buffer. Now the buffer is cleared

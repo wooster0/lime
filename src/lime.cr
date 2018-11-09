@@ -133,15 +133,16 @@ module Lime
 
   # Inserts *string* formatted into the buffer at *x*, *y*.
   #
-  # This method properly handles newlines in the string unlike `print`:
+  # This method properly aligns each line in the string beneath each other:
   # ```
   # Lime.printf("hello\nworld", 2, 2)
   # ```
+  #
   # ```text
   #
   #
-  #     hello
-  #     world
+  #   hello
+  #   world
   # ```
   def printf(string : String, x : Int32, y : Int32)
     i = 0
@@ -189,7 +190,7 @@ module Lime
     @@buffer
   end
 
-  # Draws the buffer to the screen.
+  # Draws the content of the buffer to the screen.
   def draw
     print(Lime.buffer)
   end
@@ -199,7 +200,7 @@ module Lime
   #
   # **1.** Executes the given block.
   #
-  # **2.** Draws the buffer to the screen.
+  # **2.** Draws the content of the buffer to the screen.
   #
   # **3.** Clears the buffer.
   def loop

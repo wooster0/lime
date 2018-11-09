@@ -103,7 +103,7 @@ module Lime
       # Reports only mouse drag events.
       Drag
 
-      # Reports all mouse events.
+      # Reports all mouse events: movements, clicks and drags.
       All
     end
 
