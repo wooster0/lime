@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/r00ster91/lime">
+  <title>Lime::Mouse - github.com/r00ster91/lime</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/r00ster91/lime/Lime" data-name="lime">
+      <a href="../Lime.html">Lime</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Cursor" data-name="lime::cursor">
+      <a href="../Lime/Cursor.html">Cursor</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Drawables" data-name="lime::drawables">
+      <a href="../Lime/Drawables.html">Drawables</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Circle" data-name="lime::drawables::circle">
+      <a href="../Lime/Drawables/Circle.html">Circle</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/FilledRectangle" data-name="lime::drawables::filledrectangle">
+      <a href="../Lime/Drawables/FilledRectangle.html">FilledRectangle</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels" data-name="lime::drawables::pixels">
+      <a href="../Lime/Drawables/Pixels.html">Pixels</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Pixels/Error" data-name="lime::drawables::pixels::error">
+      <a href="../Lime/Drawables/Pixels/Error.html">Error</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Drawables/Rectangle" data-name="lime::drawables::rectangle">
+      <a href="../Lime/Drawables/Rectangle.html">Rectangle</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Drawables/Rectangle/Type" data-name="lime::drawables::rectangle::type">
+      <a href="../Lime/Drawables/Rectangle/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/r00ster91/lime/Lime/Mouse" data-name="lime::mouse">
+      <a href="../Lime/Mouse.html">Mouse</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Mouse/Event" data-name="lime::mouse::event">
+      <a href="../Lime/Mouse/Event.html">Event</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Mouse/Mode" data-name="lime::mouse::mode">
+      <a href="../Lime/Mouse/Mode.html">Mode</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Window" data-name="lime::window">
+      <a href="../Lime/Window.html">Window</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">module</span> Lime::Mouse
+
+</h1>
+
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>The mouse pointer.</p>
+
+
+
+
+
+
+
+  <h2>Extended Modules</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../Lime/Mouse.html">Lime::Mouse</a></li>
+  
+  </ul>
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/modules.cr#L87" target="_blank">
+        lime/modules.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#extended-class-method" class="signature"><strong>.extended</strong></a>
+        
+          <div class="summary"><p>Returns <code>true</code> if the mouse event report range is extended, otherwise <code>false</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mode%3AMode-class-method" class="signature"><strong>.mode</strong> : Mode</a>
+        
+          <div class="summary"><p>Returns the current mouse event report mode.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#extend%28bool%3Dtrue%29-instance-method" class="signature"><strong>#extend</strong>(bool = <span class="n">true</span>)</a>
+        
+          <div class="summary"><p>Extends the mouse event report range if <em>bool</em> is <code>true</code>, otherwise resets the range.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get%3AEvent%3F-instance-method" class="signature"><strong>#get</strong> : Event?</a>
+        
+          <div class="summary"><p>Waits for input and returns <code><a href="../Lime/Mouse/Event.html">Event</a></code> if the input is a mouse event, <code>nil</code> if the input is not a mouse event or if <code><a href="../Lime/Mouse.html#mode%3AMode-class-method">.mode</a></code> is <code><a href="../Lime/Mouse/Mode.html#Off">Mode::Off</a></code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mode%3D%28mode%3AMode%29-instance-method" class="signature"><strong>#mode=</strong>(mode : Mode)</a>
+        
+          <div class="summary"><p>Sets the mouse event report mode to <em>mode</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#peek%3AEvent%3F-instance-method" class="signature"><strong>#peek</strong> : Event?</a>
+        
+          <div class="summary"><p>Returns the mouse event happening in the moment this method is called as <code><a href="../Lime/Mouse/Event.html">Event</a></code>, <code>nil</code> if the input is not a mouse event or if <code><a href="../Lime/Mouse.html#mode%3AMode-class-method">.mode</a></code> is <code><a href="../Lime/Mouse/Mode.html#Off">Mode::Off</a></code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+</div>
+
+
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="extended-class-method">
+      <div class="signature">
+        
+        def self.<strong>extended</strong>
+
+        <a class="method-permalink" href="#extended-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns <code>true</code> if the mouse event report range is extended, otherwise <code>false</code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/modules.cr#L91" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mode:Mode-class-method">
+      <div class="signature">
+        
+        def self.<strong>mode</strong> : <a href="../Lime/Mouse/Mode.html">Mode</a>
+
+        <a class="method-permalink" href="#mode%3AMode-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the current mouse event report mode.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/modules.cr#L94" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="extend(bool=true)-instance-method">
+      <div class="signature">
+        
+        def <strong>extend</strong>(bool = <span class="n">true</span>)
+
+        <a class="method-permalink" href="#extend%28bool%3Dtrue%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Extends the mouse event report range if <em>bool</em> is <code>true</code>, otherwise resets the range.</p>
+
+<p>The default X10 mouse protocol doesn't support mouse event reporting with
+x, y coordinates greater than 94.
+This extends the range to be greater than 94 by using the 1006 SGR (Select Graphic Rendition) mouse protocol.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/modules.cr#L148" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get:Event?-instance-method">
+      <div class="signature">
+        
+        def <strong>get</strong> : <a href="../Lime/Mouse/Event.html">Event</a>?
+
+        <a class="method-permalink" href="#get%3AEvent%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Waits for input and returns <code><a href="../Lime/Mouse/Event.html">Event</a></code> if the input is a mouse event,
+<code>nil</code> if the input is not a mouse event or if <code><a href="../Lime/Mouse.html#mode%3AMode-class-method">.mode</a></code> is <code><a href="../Lime/Mouse/Mode.html#Off">Mode::Off</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/modules.cr#L205" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mode=(mode:Mode)-instance-method">
+      <div class="signature">
+        
+        def <strong>mode=</strong>(mode : <a href="../Lime/Mouse/Mode.html">Mode</a>)
+
+        <a class="method-permalink" href="#mode%3D%28mode%3AMode%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the mouse event report mode to <em>mode</em>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/modules.cr#L114" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="peek:Event?-instance-method">
+      <div class="signature">
+        
+        def <strong>peek</strong> : <a href="../Lime/Mouse/Event.html">Event</a>?
+
+        <a class="method-permalink" href="#peek%3AEvent%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the mouse event happening in the moment this method is called as <code><a href="../Lime/Mouse/Event.html">Event</a></code>,
+<code>nil</code> if the input is not a mouse event or if <code><a href="../Lime/Mouse.html#mode%3AMode-class-method">.mode</a></code> is <code><a href="../Lime/Mouse/Mode.html#Off">Mode::Off</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/modules.cr#L237" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

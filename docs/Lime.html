@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.26.1">
+<meta name="generator" content="Crystal Docs 0.27.0">
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
-      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
     </div>
 
     <div class="repository-links">
@@ -96,6 +96,26 @@
       
     </li>
   
+  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Mouse" data-name="lime::mouse">
+      <a href="Lime/Mouse.html">Mouse</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Mouse/Event" data-name="lime::mouse::event">
+      <a href="Lime/Mouse/Event.html">Event</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Mouse/Mode" data-name="lime::mouse::mode">
+      <a href="Lime/Mouse/Mode.html">Mode</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
   <li class=" " data-id="github.com/r00ster91/lime/Lime/Window" data-name="lime::window">
       <a href="Lime/Window.html">Window</a>
       
@@ -132,7 +152,7 @@
 <p>Sometimes you may come across the terms "cell" and "pixel":</p>
 
 <ul><li>A "cell" refers to one place of a character on the console: <code>█</code>.</li><li>A "pixel" <strong>does not</strong> refer to a pixel of a display.
-  It refers to the <strong>half</strong> of a "cell": <code>▀</code>, <code>▄</code>.</li></ul>
+  It refers to the <strong>half</strong> of a "cell": <code>▀</code>, <code>▄</code> (also called a "half block").</li></ul>
 
 
 
@@ -157,21 +177,21 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/modules.cr#L1" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/modules.cr#L1" target="_blank">
         lime/modules.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L16" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L16" target="_blank">
         lime.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime/drawables.cr#L12" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime/drawables.cr#L3" target="_blank">
         lime/drawables.cr
       </a>
     
@@ -197,20 +217,6 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#check_key%3ASymbol%7CString%7CNil-instance-method" class="signature"><strong>#check_key</strong> : Symbol | String | Nil</a>
-        
-          <div class="summary"><p>Checks if a key is pressed.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#check_key_raw%3AString%3F-instance-method" class="signature"><strong>#check_key_raw</strong> : String?</a>
-        
-          <div class="summary"><p>Checks if a key is pressed, if it is, returns it, otherwise returns <code>nil</code>.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#clear-instance-method" class="signature"><strong>#clear</strong></a>
         
           <div class="summary"><p>Clears the buffer.</p></div>
@@ -220,14 +226,14 @@
       <li class="entry-summary">
         <a href="#draw-instance-method" class="signature"><strong>#draw</strong></a>
         
-          <div class="summary"><p>Draws the buffer to the screen.</p></div>
+          <div class="summary"><p>Draws the content of the buffer to the screen.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#get_key%3ASymbol%7CString-instance-method" class="signature"><strong>#get_key</strong> : Symbol | String</a>
         
-          <div class="summary"><p>Waits until a key has been pressed.</p></div>
+          <div class="summary"><p>Waits until a key has been pressed and returns it compactly as a symbol.</p></div>
         
       </li>
     
@@ -249,6 +255,20 @@
         <a href="#loop%28%26block%29-instance-method" class="signature"><strong>#loop</strong>(&block)</a>
         
           <div class="summary"><p>Like a game loop.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#peek_key%3ASymbol%7CString%7CNil-instance-method" class="signature"><strong>#peek_key</strong> : Symbol | String | Nil</a>
+        
+          <div class="summary"><p>Returns the key that is down in the moment this method is called compactly as a symbol or <code>nil</code> if no key is down.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#peek_key_raw%3AString%3F-instance-method" class="signature"><strong>#peek_key_raw</strong> : String?</a>
+        
+          <div class="summary"><p>Returns the key that is down in the moment this method is called or <code>nil</code> if no key is down.</p></div>
         
       </li>
     
@@ -331,50 +351,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L180" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="check_key:Symbol|String|Nil-instance-method">
-      <div class="signature">
-        
-        def <strong>check_key</strong> : Symbol | String | Nil
-
-        <a class="method-permalink" href="#check_key%3ASymbol%7CString%7CNil-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Checks if a key is pressed.
-Returns</p>
-
-<ul><li><code>:up</code> if up arrow has been pressed.</li><li><code>:down</code> if down arrow has been pressed.</li><li><code>:left</code> if left arrow has been pressed.</li><li><code>:right</code> if right arrow has been pressed.</li><li><code>:enter</code> if enter has been pressed.</li><li><code>:tab</code> if tab has been pressed.</li><li><code>:backspace</code> if backspace has been pressed.</li><li><code>:escape</code> if escape has been pressed.</li><li><code>:ctrl_c</code> if Ctrl+C has been pressed.</li></ul>
-
-<p>If none of the above keys are pressed, the key is returned as is.</p>
-
-<p>If no key is pressed, returns <code>nil</code>.</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L56" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="check_key_raw:String?-instance-method">
-      <div class="signature">
-        
-        def <strong>check_key_raw</strong> : String?
-
-        <a class="method-permalink" href="#check_key_raw%3AString%3F-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Checks if a key is pressed, if it is, returns it, otherwise returns <code>nil</code>.</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L97" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L180" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -392,7 +369,7 @@ Returns</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L174" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L174" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -405,12 +382,12 @@ Returns</p>
         <a class="method-permalink" href="#draw-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Draws the buffer to the screen.</p></div>
+        <div class="doc"><p>Draws the content of the buffer to the screen.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L194" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L194" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -423,19 +400,18 @@ Returns</p>
         <a class="method-permalink" href="#get_key%3ASymbol%7CString-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Waits until a key has been pressed.
-Returns</p>
+        <div class="doc"><p>Waits until a key has been pressed and returns it compactly as a symbol.</p>
 
 <ul><li><code>:up</code> if up arrow has been pressed.</li><li><code>:down</code> if down arrow has been pressed.</li><li><code>:left</code> if left arrow has been pressed.</li><li><code>:right</code> if right arrow has been pressed.</li><li><code>:enter</code> if enter has been pressed.</li><li><code>:tab</code> if tab has been pressed.</li><li><code>:backspace</code> if backspace has been pressed.</li><li><code>:escape</code> if escape has been pressed.</li><li><code>:ctrl_c</code> if Ctrl+C has been pressed.</li></ul>
 
-<p>If none of the above keys are pressed, the key is returned as is.</p>
+<p>If none of the above keys are pressed, the key is returned as-is.</p>
 
 <p><span class="flag purple">NOTE</span>  Ctrl+C is caught by this method and will not be handled by the system.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -455,7 +431,7 @@ Returns</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L89" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -475,7 +451,7 @@ Returns</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L301" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L301" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -493,14 +469,58 @@ The order is as follows:</p>
 
 <p><strong>1.</strong> Executes the given block.</p>
 
-<p><strong>2.</strong> Draws the buffer to the screen.</p>
+<p><strong>2.</strong> Draws the content of the buffer to the screen.</p>
 
 <p><strong>3.</strong> Clears the buffer.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L206" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L206" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="peek_key:Symbol|String|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>peek_key</strong> : Symbol | String | Nil
+
+        <a class="method-permalink" href="#peek_key%3ASymbol%7CString%7CNil-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the key that is down in the moment this method is called compactly as a symbol or <code>nil</code> if no key is down.</p>
+
+<ul><li><code>:up</code> if up arrow is down.</li><li><code>:down</code> if down arrow is down.</li><li><code>:left</code> if left arrow is down.</li><li><code>:right</code> if right arrow is down.</li><li><code>:enter</code> if enter is down.</li><li><code>:tab</code> if tab is down.</li><li><code>:backspace</code> if backspace is down.</li><li><code>:escape</code> if escape is down.</li><li><code>:ctrl_c</code> if Ctrl+C is down.</li></ul>
+
+<p>If none of the above keys are down, the key is returned as-is.</p>
+
+<p><span class="flag purple">NOTE</span>  If the key combination that is down is Ctrl+C, it's caught by this method and will not be handled by the system.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L77" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="peek_key_raw:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>peek_key_raw</strong> : String?
+
+        <a class="method-permalink" href="#peek_key_raw%3AString%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the key that is down in the moment this method is called or <code>nil</code> if no key is down.</p>
+
+<p><span class="flag purple">NOTE</span>  If the key combination that is down is Ctrl+C, it's caught by this method and will not be handled by the system.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -518,7 +538,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L215" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L215" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -536,7 +556,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L109" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L108" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -554,7 +574,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L114" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L113" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -572,7 +592,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L121" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L120" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -587,19 +607,19 @@ The order is as follows:</p>
       
         <div class="doc"><p>Inserts <em>string</em> formatted into the buffer at <em>x</em>, <em>y</em>.</p>
 
-<p>This method properly handles newlines in the string unlike <code><a href="Lime.html#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#print</a></code>:</p>
+<p>This method properly aligns each line in the string beneath each other:</p>
 
 <pre><code><span class="t">Lime</span>.printf(<span class="s">&quot;hello\nworld&quot;</span>, <span class="n">2</span>, <span class="n">2</span>)</code></pre>
 
 <pre><code class="language-text">
 
-    hello
-    world</code></pre></div>
+  hello
+  world</code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L147" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L147" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -614,19 +634,19 @@ The order is as follows:</p>
       
         <div class="doc"><p>Inserts <em>string</em> formatted into the buffer at <em>x</em>, <em>y</em>.</p>
 
-<p>This method properly handles newlines in the string unlike <code><a href="Lime.html#print%28char%3AChar%7CColorize%3A%3AObject%28Char%29%2Cx%3AInt32%2Cy%3AInt32%29-instance-method">#print</a></code>:</p>
+<p>This method properly aligns each line in the string beneath each other:</p>
 
 <pre><code><span class="t">Lime</span>.printf(<span class="s">&quot;hello\nworld&quot;</span>, <span class="n">2</span>, <span class="n">2</span>)</code></pre>
 
 <pre><code class="language-text">
 
-    hello
-    world</code></pre></div>
+  hello
+  world</code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L156" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L156" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -644,7 +664,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/63853bf495994218cccbe7f524620efb081a2207/src/lime.cr#L189" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/310a56f13d0ff2c6194aad83e61afdc4a43496b7/src/lime.cr#L189" target="_blank">View source</a>]
         
       </div>
     </div>

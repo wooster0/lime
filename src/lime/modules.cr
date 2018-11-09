@@ -201,7 +201,7 @@ module Lime
     end
 
     # Waits for input and returns `Event` if the input is a mouse event,
-    # `nil` if the input is not a mouse event or if `mode` is `Off`.
+    # `nil` if the input is not a mouse event or if `mode` is `Mode::Off`.
     def get : Event?
       return nil if mode.off?
 
@@ -233,7 +233,7 @@ module Lime
     end
 
     # Returns the mouse event happening in the moment this method is called as `Event`,
-    # `nil` if the input is not a mouse event or if `mode` is `Off`.
+    # `nil` if the input is not a mouse event or if `mode` is `Mode::Off`.
     def peek : Event?
       STDIN.read_timeout = 0.01
       get
