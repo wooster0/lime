@@ -41,11 +41,6 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/r00ster91/lime/Lime/Cursor" data-name="lime::cursor">
-      <a href="Lime/Cursor.html">Cursor</a>
-      
-    </li>
-  
   <li class="parent " data-id="github.com/r00ster91/lime/Lime/Drawables" data-name="lime::drawables">
       <a href="Lime/Drawables.html">Drawables</a>
       
@@ -96,18 +91,28 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Mouse" data-name="lime::mouse">
-      <a href="Lime/Mouse.html">Mouse</a>
+  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Modules" data-name="lime::modules">
+      <a href="Lime/Modules.html">Modules</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/r00ster91/lime/Lime/Mouse/Event" data-name="lime::mouse::event">
-      <a href="Lime/Mouse/Event.html">Event</a>
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Modules/Cursor" data-name="lime::modules::cursor">
+      <a href="Lime/Modules/Cursor.html">Cursor</a>
       
     </li>
   
-  <li class=" " data-id="github.com/r00ster91/lime/Lime/Mouse/Mode" data-name="lime::mouse::mode">
-      <a href="Lime/Mouse/Mode.html">Mode</a>
+  <li class="parent " data-id="github.com/r00ster91/lime/Lime/Modules/Mouse" data-name="lime::modules::mouse">
+      <a href="Lime/Modules/Mouse.html">Mouse</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Modules/Mouse/Event" data-name="lime::modules::mouse::event">
+      <a href="Lime/Modules/Mouse/Event.html">Event</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Modules/Mouse/Mode" data-name="lime::modules::mouse::mode">
+      <a href="Lime/Modules/Mouse/Mode.html">Mode</a>
       
     </li>
   
@@ -116,8 +121,13 @@
       
     </li>
   
-  <li class=" " data-id="github.com/r00ster91/lime/Lime/Window" data-name="lime::window">
-      <a href="Lime/Window.html">Window</a>
+  <li class=" " data-id="github.com/r00ster91/lime/Lime/Modules/Window" data-name="lime::modules::window">
+      <a href="Lime/Modules/Window.html">Window</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -141,17 +151,17 @@
 
 <h2>Features</h2>
 
-<ul><li>Drawing of</li><ul><li>PNG images</li><li>text</li><li>rectangles</li><li>filled rectangles</li><li>circles</li><li>lines</li></ul><li>Non-blocking key input</li><li>Management of the</li><ul><li>window</li><li>cursor</li><li>mouse pointer</li></ul></ul>
+<ul><li>Drawing of</li><ul><li>text</li><li>lines</li><li>rectangles</li><li>filled rectangles</li><li>circles</li><li>PNG images</li></ul><li>Management of the window</li><li>Controlling of the console cursor</li><li>Keyboard and mouse pointer input</li></ul>
 
 <h2>Installation</h2>
 
-<p>Add this to your application's <code>shard.yml</code>:</p>
+<p>Add the dependency to your <code>shard.yml</code>:</p>
 
 <pre><code class="language-yaml">dependencies:
   lime:
     github: r00ster91/lime</code></pre>
 
-<p>Then run <code>shards install</code>.</p>
+<p>Then run <code>shards install</code></p>
 
 <h2>Example</h2>
 
@@ -159,12 +169,8 @@
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;lime&quot;</span>
 
-<span class="c"># Make drawables like Rectangle, Circle available</span>
-<span class="k">require</span> <span class="s">&quot;lime/drawables&quot;</span>
-<span class="k">include</span> <span class="t">Lime</span><span class="t">::</span><span class="t">Drawables</span>
-
 <span class="c"># Create the lights:</span>
-<span class="c"># they are red, green and blue rectangles with doubled lines</span>
+<span class="c"># They are red, green and blue rectangles with doubled lines</span>
 light1 <span class="o">=</span> <span class="t">Rectangle</span>.<span class="k">new</span>(
   x: <span class="n">2</span>, y: <span class="n">1</span>,
   width: <span class="n">5</span>, height: <span class="n">3</span>,
@@ -210,6 +216,7 @@ loop <span class="k">do</span>
 
   <span class="c"># You can use `Lime.loop` instead of a normal loop to skip the above two steps</span>
 
+  <span class="c"># A short delay:</span>
   sleep <span class="n">0.5</span>
 <span class="k">end</span></code></pre>
 
@@ -217,7 +224,9 @@ loop <span class="k">do</span>
 
 <p><img src="https://i.imgur.com/hDHDiJB.gif" alt="lights"/></p>
 
-<p>See <a href="https://github.com/r00ster91/lime/tree/master/examples" target="_blank"><code>examples/</code></a> for more examples.</p>
+<p>See <a href="https://github.com/r00ster91/lime/tree/master/examples" target="_blank"><code>examples</code></a> for more examples.</p>
+
+<p>For technical information about lime, see <a href="https://github.com/r00ster91/lime/tree/master/src/README.md" target="_blank"><code>src/README.md</code></a>.</p>
 
 <h2>Contributing</h2>
 
@@ -225,7 +234,7 @@ loop <span class="k">do</span>
 
 <h2>Contributors</h2>
 
-<ul><li><a href="https://github.com/r00ster91" target="_blank">r00ster91</a> - creator and maintainer</li></ul>
+<ul><li><a href="https://github.com/r00ster91" target="_blank">r00ster</a> - creator and maintainer</li></ul>
 </div>
 </body>
 </html>
