@@ -24,7 +24,7 @@ describe Lime do
     end
 
     it "prints a default string" do
-      Lime.print("default".colorize(Colorize::ColorANSI::Default), 1, 1)
+      Lime.print("default".colorize(:default), 1, 1)
       buffer.should eq("\n default")
     end
   end
@@ -59,40 +59,171 @@ describe Lime do
       Lime.pixel(1, 1, :yellow)
       Lime.pixel(1, 0, :magenta)
       buffer.should eq(" \e[33;45m▄\e[0m")
+
+      Lime.pixel(1, 0, :magenta)
+      Lime.pixel(1, 1, :yellow)
+      buffer.should eq(" \e[35;43m▀\e[0m")
+
+      Lime.pixel(1, 0, :magenta)
+      Lime.pixel(1, 1, :yellow)
+      Lime.pixel(1, 0, :magenta)
+      Lime.pixel(1, 1, :yellow)
+      buffer.should eq(" \e[35;43m▀\e[0m")
+
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 0)
+      Lime.pixel(1, 1, :red)
+      Lime.pixel(1, 0, :green)
+      buffer.should eq(" \e[32;41m▀\e[0m")
+
+      Lime.pixel(0, 0)
+      Lime.pixel(0, 0, :red)
+      buffer.should eq("\e[31m▀\e[0m")
+
+      Lime.pixel(0, 0)
+      Lime.pixel(0, 0, :red)
+      Lime.pixel(0, 0, :red)
+      buffer.should eq("\e[31m▀\e[0m")
+
+      Lime.pixel(0, 1)
+      Lime.pixel(0, 1, :red)
+      buffer.should eq("\e[31m▄\e[0m")
+
+      Lime.pixel(0, 1)
+      Lime.pixel(0, 1, :red)
+      Lime.pixel(0, 1, :red)
+      buffer.should eq("\e[31m▄\e[0m")
+
+      Lime.pixel(0, 1)
+      Lime.pixel(0, 1)
+      Lime.pixel(0, 1, :red)
+      Lime.pixel(0, 1, :red)
+      buffer.should eq("\e[31m▄\e[0m")
+
+      Lime.pixel(0, 1)
+      Lime.pixel(0, 1)
+      Lime.pixel(0, 0, :red)
+      Lime.pixel(0, 0, :red)
+      buffer.should eq("\e[41m▄\e[0m")
     end
 
     it "inserts default pixels into the buffer" do
-      Lime.pixel(1, 1, Colorize::ColorANSI::Default)
+      Lime.pixel(1, 1)
       buffer.should eq(" ▄")
 
-      Lime.pixel(1, 0, Colorize::ColorANSI::Default)
+      Lime.pixel(1, 0)
       buffer.should eq(" ▀")
 
-      Lime.pixel(1, 1, Colorize::ColorANSI::Default)
-      Lime.pixel(1, 0, Colorize::ColorANSI::Default)
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 0)
       buffer.should eq(" █")
+
+      Lime.pixel(1, 0)
+      Lime.pixel(1, 1)
+      buffer.should eq(" █")
+
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 0, :red)
+      Lime.pixel(1, 0)
+      buffer.should eq(" █")
+
+      Lime.pixel(1, 0)
+      Lime.pixel(1, 1, :red)
+      Lime.pixel(1, 1)
+      buffer.should eq(" █")
+
+      Lime.pixel(1, 1, :red)
+      Lime.pixel(1, 0, :green)
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 0)
+      buffer.should eq(" █")
+
+      Lime.pixel(1, 0)
+      Lime.pixel(1, 0)
+      buffer.should eq(" ▀")
+
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 1)
+      buffer.should eq(" ▄")
+    end
+
+    it "inserts default and colored pixels into the buffer" do
+      Lime.pixel(1, 1, :red)
+      Lime.pixel(1, 0)
+      buffer.should eq(" \e[41m▀\e[0m")
+
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 0, :red)
+      buffer.should eq(" \e[41m▄\e[0m")
+
+      Lime.pixel(1, 1, :red)
+      Lime.pixel(1, 2)
+      buffer.should eq(" \e[31m▄\e[0m\n          ▀")
+
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 2, :red)
+      buffer.should eq(" ▄\n \e[31m▀\e[0m")
+
+      Lime.pixel(1, 0)
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 1, :red)
+      buffer.should eq(" \e[41m▀\e[0m")
+
+      Lime.pixel(1, 0)
+      Lime.pixel(1, 1)
+      Lime.pixel(1, 0, :red)
+      buffer.should eq(" \e[41m▄\e[0m")
+
+      Lime.pixel(1, 0)
+      Lime.pixel(1, 0, :red)
+      Lime.pixel(1, 1)
+      buffer.should eq(" \e[41m▄\e[0m")
     end
   end
 
   describe ".line" do
     it "inserts a colored line into the buffer" do
-      Lime.line(1, 1, 5, 5, :green)
+      Lime.line(0, 0, 5, 5, :red)
       buffer.should eq(
         <<-LINE
-         \e[32m▄\e[0m
-                   \e[32m▀\e[0m\e[32m▄\e[0m
-                                       \e[32m▀\e[0m\e[32m▄\e[0m
+        \e[31m▀\e[0m\e[31m▄\e[0m
+                            \e[31m▀\e[0m\e[31m▄\e[0m
+                                                \e[31m▀\e[0m\e[31m▄\e[0m
+        LINE
+      )
+
+      Lime.line(0, 0, 5, 10, :red)
+      buffer.should eq(
+        <<-LINE
+        \e[31;41m▀\e[0m
+                     \e[31;41m▀\e[0m
+                                  \e[31;41m▀\e[0m
+                                               \e[31;41m▀\e[0m
+                                                            \e[31;41m▀\e[0m
+                                                                         \e[31m▀\e[0m
         LINE
       )
     end
 
     it "inserts a default line into the buffer" do
-      Lime.line(0, 0, 10, 5, Colorize::ColorANSI::Default)
+      Lime.line(0, 0, 5, 5)
       buffer.should eq(
         <<-LINE
-        ▀▀▄▄
-            ▀▀▄▄
-                ▀▀▄
+        ▀▄
+          ▀▄
+            ▀▄
+        LINE
+      )
+
+      Lime.line(0, 0, 5, 10)
+      buffer.should eq(
+        <<-LINE
+        █
+         █
+          █
+           █
+            █
+             ▀
         LINE
       )
     end

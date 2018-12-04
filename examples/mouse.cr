@@ -1,6 +1,4 @@
 require "../lime"
-require "../src/lime/drawables"
-include Lime::Drawables
 
 # This will be used to detect if there was a collision between the mouse
 # and the target's hitbox
@@ -23,13 +21,13 @@ target = Rectangle.new(x, y, 3, 2, Round, :white)
 hitbox = Hitbox.new(x, y)
 
 # Set the mouse mode to Click which will report all clicks:
-Lime::Mouse.mode = Lime::Mouse::Mode::Click
+Mouse.mode = Mouse::Mode::Click
 
 puts "Press any mouse button to start"
 
 loop do
   # Wait for an event:
-  event = Lime::Mouse.get
+  event = Mouse.get
 
   # Exit if the event is not a mouse event:
   exit if event.nil?

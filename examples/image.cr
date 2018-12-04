@@ -1,6 +1,4 @@
 require "../lime"
-require "../lime/drawables"
-include Lime::Drawables
 
 # Load the image:
 image_path = "#{__DIR__}/image.png"

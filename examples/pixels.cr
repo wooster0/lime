@@ -1,6 +1,4 @@
 require "../lime"
-require "../lime/drawables"
-include Lime::Drawables
 
 # Captain Viridian from the game VVVVVV
 VIRIDIAN = <<-VIRIDIAN

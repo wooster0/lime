@@ -1,4 +1,5 @@
 require "colorize"
+require "./lime/drawables"
 require "./lime/modules"
 
 struct Colorize::Object
@@ -7,9 +8,15 @@ end
 
 # The main module of lime.
 #
-# All x, y arguments are zero-based.
+# All `x`, `y` arguments are zero-based.
 #
-# Sometimes you may come across the terms "cell" and "pixel":
+# An `IndexError` will be raised if:
+# * An `x` argument is greater than *`Window.width`*.
+# * An `x` argument is lower than *`-Window.width_cells`*.
+# * An `y` argument is greater than *`Window.height`*.
+# * An `y` argument is lower than *`-Window.height_cells`*.
+#
+# NOTE: Sometimes you might come across the terms "cell" and "pixel":
 # * A "cell" refers to one place of a character on the console: `█`.
 # * A "pixel" **does not** refer to a pixel of a display.
 #   It refers to the **half** of a "cell": `▀`, `▄` (also called a "half block").
@@ -19,19 +26,67 @@ module Lime
   @@empty_buffer = Array(Char | Colorize::Object(Char)).new(Window.width_cells*Window.height_cells) { ' ' }
   @@buffer : Array(Char | Colorize::Object(Char)) = @@empty_buffer.dup
 
+  # Sets the height of the buffer to *height*.
+  def bufferHeight=(height)
+    count = Window.width_cells*height
+    if height > @@buffer.size/Window.width_cells
+      count.times do
+        @@buffer << ' '
+        @@empty_buffer << ' '
+      end
+    else
+      @@buffer = @@buffer.shift(count)
+      @@empty_buffer = @@empty_buffer.shift(count)
+    end
+  end
+
+  # Returns the content of the buffer as a string.
+  def buffer : String
+    String.build do |io|
+      @@buffer.each do |char|
+        io << char
+      end
+    end
+  end
+
+  # Sets the buffer to *buffer*.
+  def buffer=(@@buffer : Array(Char | Colorize::Object(Char)))
+  end
+
+  # Returns the character of the buffer at *x*, *y*.
+  def buffer(x, y) : Char | Colorize::Object(Char)
+    @@buffer[x + Window.width_cells * y]
+  end
+
+  # Returns the buffer as an array of characters.
+  def raw_buffer : Array(Char | Colorize::Object(Char))
+    @@buffer
+  end
+
+  # Draws the content of the buffer to the screen.
+  def draw
+    print(Lime.buffer)
+  end
+
+  # Clears the buffer.
+  def clear
+    # Instead of rebuilding the whole buffer every time again, copy the empty buffer:
+    @@buffer = @@empty_buffer.dup
+  end
+
   # Waits until a key has been pressed and returns it.
   #
   # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
   def get_key_raw : String
     STDIN.raw do |io|
-      buffer = Bytes.new(3)
-      String.new(buffer[0, io.read(buffer)])
+      bytes = Bytes.new(3)
+      String.new(bytes[0, io.read(bytes)])
     end
   end
 
   # Returns the key that is down in the moment this method is called or `nil` if no key is down.
   #
-  # NOTE: If the key combination that is down is Ctrl+C, it's caught by this method and will not be handled by the system.
+  # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
   def peek_key_raw : String?
     STDIN.read_timeout = 0.01
     get_key_raw
@@ -97,7 +152,7 @@ module Lime
     #
     # If none of the above keys are down, the key is returned as-is.
     #
-    # NOTE: If the key combination that is down is Ctrl+C, it's caught by this method and will not be handled by the system.
+    # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
     def peek_key : Symbol | String | Nil
       case key = peek_key_raw
       {{KEY_BODY.id}}
@@ -112,7 +167,7 @@ module Lime
   # Inserts *string* into the buffer at *x*, *y*.
   def print(string : String, x : Int32, y : Int32)
     string.each_char_with_index do |char, i|
-      print(char, x + i, y)
+      Lime.print(char, x + i, y)
     end
   end
 
@@ -124,20 +179,22 @@ module Lime
     if fore == Colorize::ColorANSI::Default && back == Colorize::ColorANSI::Default
       Lime.print(string, x, y)
     else
+      # Remove color escape sequences:
       string = string[string.index('m').not_nil! + 1..string.rindex('\e').not_nil! - 1]
+
       string.each_char_with_index do |char, i|
-        @@buffer[x + i + (y*Window.width_cells)] = char.colorize.fore(fore).back(back)
+        Lime.print(char.colorize(fore).back(back), x + i, y)
       end
     end
   end
 
   # Inserts *string* formatted into the buffer at *x*, *y*.
   #
-  # This method properly aligns each line in the string beneath each other:
+  # This method properly aligns each line in the string beneath each other.
+  #
   # ```
   # Lime.printf("hello\nworld", 2, 2)
   # ```
-  #
   # ```text
   #
   #
@@ -157,42 +214,18 @@ module Lime
     fore = string.fore
     back = string.back
     string = string.to_s
-
     if fore == Colorize::ColorANSI::Default && back == Colorize::ColorANSI::Default
       Lime.printf(string, x, y)
     else
+      # Remove color escape sequences:
       string = string[string.index('m').not_nil! + 1..string.rindex('\e').not_nil! - 1]
+
       i = 0
       string.each_line do |line|
         Lime.print(line.colorize.fore(fore).back(back), x, y + i)
         i += 1
       end
     end
-  end
-
-  # Clears the buffer.
-  def clear
-    # Instead of rebuilding the whole buffer every time again, copy the empty buffer
-    @@buffer = @@empty_buffer.dup
-  end
-
-  # Returns the buffer as a string.
-  def buffer : String
-    String.build do |io|
-      @@buffer.each do |char|
-        io << char
-      end
-    end
-  end
-
-  # Returns the buffer as an array of characters.
-  def raw_buffer : Array(Char | Colorize::Object(Char))
-    @@buffer
-  end
-
-  # Draws the content of the buffer to the screen.
-  def draw
-    print(Lime.buffer)
   end
 
   # Like a game loop.
@@ -212,90 +245,114 @@ module Lime
   end
 
   # Inserts a pixel at *x*, *y* with *color* into the buffer.
+  #
+  # ```
+  # Lime.pixel(2, 2)
+  # ```
+  # ```text
+  #
+  #   ▀
+  # ```
+  #
+  # ```
+  # Lime.pixel(2, 2)
+  # Lime.pixel(2, 3)
+  # ```
+  # ```text
+  #
+  #   █
+  # ```
   def pixel(x : Int32, y : Int32, color : Colorize::Color = Colorize::ColorANSI::Default)
-    position = x + (y/2)*Window.width_cells
+    char = Lime.buffer(x, y/2)
 
-    if color == Colorize::ColorANSI::Default
-      default_pixel(position, y)
-      return
-    end
+    pixel = if y.even?
+              if char.to_s == "▀"
+                if color == Colorize::ColorANSI::Default
+                  '▀'
+                else
+                  '▀'.colorize(color)
+                end
+              elsif char.to_s == "█"
+                if color == Colorize::ColorANSI::Default
+                  '█'
+                else
+                  '▄'.colorize.back(color)
+                end
+              elsif char.to_s.includes?('▄')
+                if color == Colorize::ColorANSI::Default && char.as(Colorize::Object(Char)).fore == Colorize::ColorANSI::Default
+                  '█'
+                elsif char.is_a?(Colorize::Object(Char))
+                  if color == Colorize::ColorANSI::Default
+                    '▀'.colorize.back(char.fore)
+                  else
+                    char.back(color)
+                  end
+                else
+                  char.as(Char).colorize.back(color)
+                end
+              else
+                if char.is_a?(Colorize::Object(Char))
+                  '▀'.colorize(color).back(char.back)
+                else
+                  '▀'.colorize(color)
+                end
+              end
+            else
+              if char.to_s == "▀"
+                if color == Colorize::ColorANSI::Default
+                  '█'
+                else
+                  '▀'.colorize.back(color)
+                end
+              elsif char.to_s == "█"
+                if color == Colorize::ColorANSI::Default
+                  '█'
+                else
+                  '▀'.colorize.back(color)
+                end
+              elsif char.to_s.includes?('▀')
+                if color == Colorize::ColorANSI::Default && char.as(Colorize::Object(Char)).fore == Colorize::ColorANSI::Default
+                  '█'
+                elsif char.is_a?(Colorize::Object(Char))
+                  if color == Colorize::ColorANSI::Default
+                    '▄'.colorize.back(char.fore)
+                  else
+                    char.back(color)
+                  end
+                else
+                  char.as(Char).colorize.back(color)
+                end
+              else
+                if char.is_a?(Colorize::Object(Char))
+                  '▄'.colorize(color).back(char.back)
+                else
+                  '▄'.colorize(color)
+                end
+              end
+            end
 
-    @@buffer[position] = (if y.even?
-      if @@buffer[position].to_s.includes?('▄')
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          char.back(color)
-        else
-          @@buffer[position].as(Char).colorize.back(color)
-        end
-      else
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          '▀'.colorize(color).back(char.back)
-        else
-          '▀'.colorize(color)
-        end
-      end
-    else
-      if @@buffer[position].to_s.includes?('▀')
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          char.back(color)
-        else
-          @@buffer[position].as(Char).colorize.back(color)
-        end
-      else
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          '▄'.colorize(color).back(char.back)
-        else
-          '▄'.colorize(color)
-        end
-      end
-    end)
-  end
-
-  private def default_pixel(position, y)
-    @@buffer[position] = (if y.even?
-      if @@buffer[position].to_s.includes?('▄')
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          '▀'.colorize.back(char.fore)
-        else
-          '█'
-        end
-      elsif @@buffer[position].to_s.includes?('█')
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          '▄'.colorize.back(char.fore)
-        else
-          '█'
-        end
-      else
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          '▀'.colorize.back(char.back)
-        else
-          '▀'
-        end
-      end
-    else
-      if @@buffer[position].to_s.includes?('▀')
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          '▄'.colorize.back(char.fore)
-        else
-          '█'
-        end
-      elsif @@buffer[position].to_s.includes?('█')
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          '▄'.colorize.back(char.fore)
-        else
-          '█'
-        end
-      else
-        if char = @@buffer[position].as?(Colorize::Object(Char))
-          '▄'.colorize.back(char.back)
-        else
-          '▄'
-        end
-      end
-    end)
+    Lime.print(pixel, x, y/2)
   end
 
   # Inserts a line from *x1*, *y1* to *x2*, *y2* with *color* into the buffer.
+  #
+  # ```
+  # Lime.line(0, 0, 5, 5)
+  # ```
+  # ```text
+  # ▀▄
+  #   ▀▄
+  #     ▀▄
+  # ```
+  #
+  # ```
+  # Lime.line(0, 0, 10, 5)
+  # ```
+  # ```text
+  # ▀▀▄▄
+  #     ▀▀▄▄
+  #         ▀▀▄
+  # ```
   #
   # This method uses [Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm).
   def line(x1 : Int32, y1 : Int32,
@@ -326,7 +383,6 @@ module Lime
     end
     d = 2*dy - dx
     y = y1
-
     (x1..x2).each do |x|
       Lime.pixel(x, y, color)
       if d > 0
@@ -348,7 +404,6 @@ module Lime
     end
     d = 2*dx - dy
     x = x1
-
     (y1..y2).each do |y|
       Lime.pixel(x, y, color)
       if d > 0

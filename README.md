@@ -7,21 +7,19 @@ A library for drawing graphics on the console screen
 ## Features
 
 * Drawing of
-  * PNG images
   * text
+  * lines
   * rectangles
   * filled rectangles
   * circles
-  * lines
-* Non-blocking key input
-* Management of the
-  * window
-  * cursor
-  * mouse pointer
+  * PNG images
+* Management of the window
+* Controlling of the console cursor
+* Keyboard and mouse pointer input
 
 ## Installation
 
-Add this to your application's `shard.yml`:
+Add the dependency to your `shard.yml`:
 
 ```yaml
 dependencies:
@@ -29,7 +27,7 @@ dependencies:
     github: r00ster91/lime
 ```
 
-Then run `shards install`.
+Then run `shards install`
 
 ## Example
 
@@ -38,12 +36,8 @@ Three lights flashing repeatedly in order:
 ```crystal
 require "lime"
 
-# Make drawables like Rectangle, Circle available
-require "lime/drawables"
-include Lime::Drawables
-
 # Create the lights:
-# they are red, green and blue rectangles with doubled lines
+# They are red, green and blue rectangles with doubled lines
 light1 = Rectangle.new(
   x: 2, y: 1,
   width: 5, height: 3,
@@ -89,6 +83,7 @@ loop do
 
   # You can use `Lime.loop` instead of a normal loop to skip the above two steps
 
+  # A short delay:
   sleep 0.5
 end
 ```
@@ -97,7 +92,9 @@ In the top left corner we can see:
 
 ![lights](https://i.imgur.com/hDHDiJB.gif)
 
-See [`examples/`](https://github.com/r00ster91/lime/tree/master/examples) for more examples.
+See [`examples`](https://github.com/r00ster91/lime/tree/master/examples) for more examples.
+
+For technical information about lime, see [`src/README.md`](https://github.com/r00ster91/lime/tree/master/src/README.md).
 
 ## Contributing
 
@@ -112,4 +109,4 @@ See [`examples/`](https://github.com/r00ster91/lime/tree/master/examples) for mo
 
 ## Contributors
 
-- [r00ster91](https://github.com/r00ster91) - creator and maintainer
+- [r00ster](https://github.com/r00ster91) - creator and maintainer

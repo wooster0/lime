@@ -1,9 +1,7 @@
 require "../lime"
-require "../lime/drawables"
-include Lime::Drawables
 
 # Create the lights:
-# they are red, green and blue rectangles with doubled lines
+# They are red, green and blue rectangles with doubled lines
 light1 = Rectangle.new(
   x: 2, y: 1,
   width: 5, height: 3,
@@ -49,5 +47,6 @@ loop do
 
   # You can use `Lime.loop` instead of a normal loop to skip the above two steps
 
+  # A short delay:
   sleep 0.5
 end

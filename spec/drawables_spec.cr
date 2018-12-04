@@ -1,60 +1,62 @@
 require "./spec_helper"
-require "../src/lime/drawables"
-include Lime::Drawables
-
 describe Rectangle do
   describe ".initialize" do
     it "initializes" do
       rectangle = Rectangle.new(0, 0, 5, 5, Default, :red)
-      rectangle.@top.to_s.should eq("\e[31m┌───┐\e[0m")
-      rectangle.@tile.to_s.should eq("\e[31m│   │\e[0m")
-      rectangle.@bottom.to_s.should eq("\e[31m└───┘\e[0m")
+      rectangle.x.should eq(0)
+      rectangle.y.should eq(0)
+      rectangle.width.should eq(5)
+      rectangle.height.should eq(5)
+      rectangle.type.should eq(Default)
+      rectangle.color.should eq(Colorize::ColorANSI::Red)
 
-      rectangle = Rectangle.new(0, 0, 5, 5, Double, :green)
-      rectangle.@top.to_s.should eq("\e[32m╔═══╗\e[0m")
-      rectangle.@tile.to_s.should eq("\e[32m║   ║\e[0m")
-      rectangle.@bottom.to_s.should eq("\e[32m╚═══╝\e[0m")
+      rectangle.@rectangle.to_s.should eq(
+        <<-RECTANGLE
+        \e[31m┌───┐
+        │   │
+        │   │
+        │   │
+        └───┘\e[0m
+        RECTANGLE
+      )
 
-      rectangle = Rectangle.new(0, 0, 5, 5, Round, :blue)
-      rectangle.@top.to_s.should eq("\e[34m╭───╮\e[0m")
-      rectangle.@tile.to_s.should eq("\e[34m│   │\e[0m")
-      rectangle.@bottom.to_s.should eq("\e[34m╰───╯\e[0m")
+      rectangle = Rectangle.new(0, 0, 1, 1)
+      rectangle.@rectangle.should eq("█")
 
-      rectangle = Rectangle.new(0, 0, 2, 2, Default, Colorize::ColorANSI::Default)
-      rectangle.@top.to_s.should eq("┌┐")
-      rectangle.@tile.to_s.should eq("││")
-      rectangle.@bottom.to_s.should eq("└┘")
-    end
+      rectangle = Rectangle.new(0, 0, 0, 1)
+      rectangle.@rectangle.should eq("")
 
-    it "uses block characters" do
-      rectangle = Rectangle.new(0, 0, 5, 1, Default, :blue)
-      rectangle.@top.to_s.should eq("")
-      rectangle.@tile.to_s.should eq("\e[34m█████\e[0m")
-      rectangle.@bottom.to_s.should eq("")
+      rectangle = Rectangle.new(0, 0, 1, 0)
+      rectangle.@rectangle.should eq("")
 
-      rectangle = Rectangle.new(0, 0, 1, 5, Default, :blue)
-      rectangle.@top.to_s.should eq("")
-      rectangle.@tile.to_s.should eq("\e[34m█\e[0m")
-      rectangle.@bottom.to_s.should eq("")
+      rectangle = Rectangle.new(0, 0, 0, 0)
+      rectangle.@rectangle.should eq("")
 
-      rectangle = Rectangle.new(0, 0, 1, 1, Default, Colorize::ColorANSI::Default)
-      rectangle.@top.to_s.should eq("")
-      rectangle.@tile.to_s.should eq("█")
-      rectangle.@bottom.to_s.should eq("")
+      rectangle = Rectangle.new(0, 0, 3, 1)
+      rectangle.@rectangle.should eq("███")
+
+      rectangle = Rectangle.new(0, 0, 1, 3)
+      rectangle.@rectangle.should eq(
+        <<-RECTANGLE
+        █
+        █
+        █
+        RECTANGLE
+      )
     end
   end
 
   it "draws" do
-    rectangle = Rectangle.new(2, 2, 4, 4, Default, Colorize::ColorANSI::Default)
+    rectangle = Rectangle.new(1, 1, 5, 5, Default)
     rectangle.draw
     buffer.should eq(
       <<-RECTANGLE
 
-
-        ┌──┐
-        │  │
-        │  │
-        └──┘
+       ┌───┐
+       │   │
+       │   │
+       │   │
+       └───┘
       RECTANGLE
     )
   end
@@ -63,24 +65,35 @@ end
 describe FilledRectangle do
   it "initializes" do
     filled_rectangle = FilledRectangle.new(0, 0, 5, 5, "#", :red)
+    filled_rectangle.x.should eq(0)
+    filled_rectangle.y.should eq(0)
+    filled_rectangle.width.should eq(5)
+    filled_rectangle.height.should eq(5)
+    filled_rectangle.material.should eq("#")
+    filled_rectangle.color.should eq(Colorize::ColorANSI::Red)
     filled_rectangle.@tile.to_s.should eq("\e[31m#####\e[0m")
 
-    filled_rectangle = FilledRectangle.new(0, 0, 10, 10, color: Colorize::ColorANSI::Default)
-    filled_rectangle.@tile.to_s.should eq("██████████")
+    filled_rectangle = FilledRectangle.new(0, 0, 0, 10)
+    filled_rectangle.@tile.to_s.should eq("")
+
+    filled_rectangle = FilledRectangle.new(0, 0, 10, 0)
+    filled_rectangle.@tile.to_s.should eq("")
+
+    filled_rectangle = FilledRectangle.new(0, 0, 2, 1)
+    filled_rectangle.@tile.to_s.should eq("██")
+
+    filled_rectangle = FilledRectangle.new(0, 0, 1, 2)
+    filled_rectangle.@tile.to_s.should eq("█")
   end
 
   it "draws" do
-    filled_rectangle = FilledRectangle.new(5, 5, 2, 2, "O", :yellow)
+    filled_rectangle = FilledRectangle.new(1, 1, 2, 2, "O", :yellow)
     filled_rectangle.draw
     buffer.should eq(
       <<-FILLED_RECTANGLE
 
-
-
-
-
-           \e[33mO\e[0m\e[33mO\e[0m
-                             \e[33mO\e[0m\e[33mO\e[0m
+       \e[33mO\e[0m\e[33mO\e[0m
+                         \e[33mO\e[0m\e[33mO\e[0m
       FILLED_RECTANGLE
     )
   end

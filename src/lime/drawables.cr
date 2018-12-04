@@ -1,23 +1,19 @@
 require "stumpy_png"
 
 module Lime
-  # This module contains drawables that can be inserted into the buffer.
+  # Drawables that can be inserted into the buffer using the `draw` method of every drawable.
   #
-  # If you want to use the drawables in the Top Level Namespace,
-  # you can `include` them:
-  # ```
-  # require "lime/drawables"
-  # include Lime::Drawables
-  # ```
+  # The drawables are available on the Top Level Namespace by default.
   module Drawables
     # A drawable rectangle.
     struct Rectangle
       property x, y
-      getter width, type, color
+      getter width, height, type, color
 
       # The type of a `Rectangle`.
       enum Type
         # The default rectangle type. It looks like this:
+        #
         # ```text
         # ┌────┐
         # │    │
@@ -26,6 +22,7 @@ module Lime
         Default
 
         # Like the default type but with doubled lines:
+        #
         # ```text
         # ╔════╗
         # ║    ║
@@ -34,6 +31,7 @@ module Lime
         Double
 
         # Like the default type but with round corners:
+        #
         # ```text
         # ╭────╮
         # │    │
@@ -51,73 +49,56 @@ module Lime
       end
 
       def height=(@height)
+        init
       end
 
       def type=(@type)
         init
       end
 
-      @top : Colorize::Object(String) | String = ""
-      @tile : Colorize::Object(String) | Colorize::Object(Char) | String = ""
-      @bottom : Colorize::Object(String) | String = ""
+      @rectangle : Colorize::Object(String) | String = ""
 
       private macro init
         if @width == 1
-          @top, @tile, @bottom = "", '█'.colorize(color), ""
-          {{yield}}
+          @rectangle = "█\n"*@height
         elsif @height == 1
-          @top, @tile, @bottom = "", ("█"*@width).colorize(color), ""
-          {{yield}}
+          @rectangle = "█"*@width
         elsif @width == 0 || @height == 0
-          @top, @tile, @bottom = "", "", ""
-          {{yield}}
         else
-          @width -= 2 unless @width == 0
+          width, height = @width-2, @height-2
+          spaces = " "*width
           case @type
           when .default?
-            middle = "─"*@width
-            @top = ('┌' + middle + '┐').colorize(@color)
-            @tile = ('│' + (" "*@width) + '│').colorize(@color)
-            @bottom = ('└' + middle + '┘').colorize(@color)
+            middle = "─"*width
+            @rectangle = "┌#{middle}┐\n#{"│#{spaces}│\n"*height}└#{middle}┘"
           when .double?
-            middle = "═"*@width
-            @top = ('╔' + middle + '╗').colorize(@color)
-            @tile = ('║' + (" "*@width) + '║').colorize(@color)
-            @bottom = ('╚' + middle + '╝').colorize(@color)
+            middle = "═"*width
+            @rectangle = "╔#{middle}╗\n#{"║#{spaces}║\n"*height}╚#{middle}╝"
           when .round?
-            middle = "─"*@width
-            @top = ('╭' + middle + '╮').colorize(@color)
-            @tile = ('│' + (" "*@width) + '│').colorize(@color)
-            @bottom = ('╰' + middle + '╯').colorize(@color)
+            middle = "─"*width
+            @rectangle = "╭#{middle}╮\n#{"│#{spaces}│\n"*height}╰#{middle}╯"
           end
+        end
+        @rectangle = @rectangle.as(String).rchop('\n')
+        if @color != Colorize::ColorANSI::Default
+          @rectangle = @rectangle.as(String).colorize(color)
         end
       end
 
       # TODO: use ` instead of ** at the Top Level Namespace constants in the
-      # `initialize` description after
-      # https://github.com/crystal-lang/crystal/issues/6637 is fixed.
-      #
-      # Currently when using ` instead of **, the constants are clickable and
-      # will lead to an non-existent page: toplevel.html
+      # `initialize` description after 0.27.1 is released
 
       # Initializes a new `Rectangle`.
       #
       # For specifying the type, you can use the Top Level Namespace constants
       # **Default**, **Double** and **Round**.
       def initialize(@x : Int32, @y : Int32, @width : Int32, @height : Int32, @type : Type = Default, @color : Colorize::Color = Colorize::ColorANSI::Default)
-        init { @y -= 1 }
-        @height -= 1 unless @height == 1
+        init
       end
 
       # Inserts the rectangle into the buffer.
       def draw
-        Lime.print(@top, @x, @y)
-        i = 0
-        @height.times do
-          i += 1
-          Lime.print(@tile, @x, @y + i)
-        end
-        Lime.print(@bottom, @x, @y + i)
+        Lime.printf(@rectangle, @x, @y)
       end
     end
 
@@ -134,15 +115,15 @@ module Lime
         initialize(@x, @y, @width, @height, @material, @color)
       end
 
-      @tile : Colorize::Object(String)
+      @tile : Colorize::Object(String) | String
 
       # Initializes a new `FilledRectangle`.
       #
       # *material* is what the filled rectangle will be built with:
+      #
       # ```
       # FilledRectangle.new(0, 0, 5, 5, "#").draw
       # ```
-      #
       # ````text
       # #####
       # #####
@@ -151,7 +132,14 @@ module Lime
       # #####
       # ```
       def initialize(@x : Int32, @y : Int32, @width : Int32, @height : Int32, @material : String = "█", @color : Colorize::Color = Colorize::ColorANSI::Default)
-        @tile = (@material*@width).colorize(@color)
+        if @height > 0
+          @tile = @material*@width
+          if !color.default?
+            @tile = @tile.as(String).colorize(@color)
+          end
+        else
+          @tile = ""
+        end
       end
 
       # Inserts the filled rectangle into the buffer.
@@ -371,11 +359,13 @@ module Lime
   end
 end
 
-# Alias for the default rectangle type: `Lime::Drawables::Rectangle::Type::Default`.
-Default = Lime::Drawables::Rectangle::Type::Default
+include Lime::Drawables
 
-# Alias for the double rectangle type: `Lime::Drawables::Rectangle::Type::Double`.
-Double = Lime::Drawables::Rectangle::Type::Double
+# The default rectangle type: `Rectangle::Type::Default`.
+Default = Rectangle::Type::Default
 
-# Alias for the round rectangle type: `Lime::Drawables::Rectangle::Type::Round`.
-Round = Lime::Drawables::Rectangle::Type::Round
+# The double rectangle type: `Rectangle::Type::Double`.
+Double = Rectangle::Type::Double
+
+# The round rectangle type: `Rectangle::Type::Round`.
+Round = Rectangle::Type::Round

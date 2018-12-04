@@ -9,7 +9,7 @@ class String
     end
   end
 
-  # Cuts `self` to multiple pieces of size *size* and returns them.
+  # Cuts `self` down to multiple pieces of size *size* and returns them as an array.
   #
   # ```
   # "hello world".pieces(2) # => ["he", "ll", "o ", "wo", "rl", "d"]
@@ -27,13 +27,13 @@ class String
       io << char
       i += 1
     end
-    pieces << io.to_s unless io.empty?
+    pieces << io.to_s if !io.empty?
     pieces
   end
 end
 
 def buffer
-  buffer = Lime.buffer.pieces(Lime::Window.width_cells)
+  buffer = Lime.buffer.pieces(Window.width_cells)
   Lime.clear
 
   skip = true
