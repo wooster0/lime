@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.27.0">
+<meta name="generator" content="Crystal Docs 0.27.2">
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -35,6 +35,11 @@
 
   <div class="types-list">
     <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/toplevel" data-name="top level namespace">
+      <a href="toplevel.html">Top Level Namespace</a>
+      
+    </li>
   
   <li class="parent open current" data-id="github.com/r00ster91/lime/Lime" data-name="lime">
       <a href="Lime.html">Lime</a>
@@ -157,11 +162,11 @@
 
   <p>The main module of lime.</p>
 
-<p>All <code>x</code>, <code>y</code> arguments are zero-based.</p>
+<p>All <code>x</code> and <code>y</code> arguments are zero-based.</p>
 
 <p>An <code>IndexError</code> will be raised if:</p>
 
-<ul><li>An <code>x</code> argument is greater than <em><code><a href="Lime/Modules/Window.html#width%3AInt32-class-method">Window.width</a></code></em>.</li><li>An <code>x</code> argument is lower than <em><code>-<a href="Lime/Modules/Window.html#width_cells%3AInt32-class-method">Window.width_cells</a></code></em>.</li><li>An <code>y</code> argument is greater than <em><code><a href="Lime/Modules/Window.html#height%3AInt32-class-method">Window.height</a></code></em>.</li><li>An <code>y</code> argument is lower than <em><code>-<a href="Lime/Modules/Window.html#height_cells%3AInt32-class-method">Window.height_cells</a></code></em>.</li></ul>
+<ul><li>An <code>x</code> argument is greater than <code><a href="Lime/Modules/Window.html#width%3AInt32-class-method">Window.width</a></code>.</li><li>An <code>x</code> argument is lower than <code>-<a href="Lime/Modules/Window.html#width_cells%3AInt32-class-method">Window.width_cells</a></code>.</li><li>A <code>y</code> argument is greater than <code><a href="Lime/Modules/Window.html#height%3AInt32-class-method">Window.height</a></code>.</li><li>A <code>y</code> argument is lower than <code>-<a href="Lime/Modules/Window.html#height_cells%3AInt32-class-method">Window.height_cells</a></code>.</li></ul>
 
 <p><span class="flag purple">NOTE</span>  Sometimes you might come across the terms "cell" and "pixel":</p>
 
@@ -191,21 +196,21 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/drawables.cr#L3" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/drawables.cr#L3" target="_blank">
         lime/drawables.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/modules.cr#L1" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/modules.cr#L1" target="_blank">
         lime/modules.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L23" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L23" target="_blank">
         lime.cr
       </a>
     
@@ -289,7 +294,7 @@
       <li class="entry-summary">
         <a href="#loop%28%26block%29-instance-method" class="signature"><strong>#loop</strong>(&block)</a>
         
-          <div class="summary"><p>Like a game loop.</p></div>
+          <div class="summary"><p>The order of the loop is as follows:</p></div>
         
       </li>
     
@@ -386,7 +391,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L57" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L54" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -404,7 +409,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L41" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -422,7 +427,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -440,7 +445,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -458,7 +463,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -476,7 +481,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L67" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -500,7 +505,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L132" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L132" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -520,7 +525,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L80" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L76" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -552,7 +557,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L358" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L357" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -565,8 +570,7 @@
         <a class="method-permalink" href="#loop%28%26block%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Like a game loop.
-The order is as follows:</p>
+        <div class="doc"><p>The order of the loop is as follows:</p>
 
 <p><strong>1.</strong> Executes the given block.</p>
 
@@ -577,7 +581,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L239" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L238" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -601,7 +605,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L132" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L132" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -621,7 +625,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L90" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L86" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -650,7 +654,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L265" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L264" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -668,7 +672,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L163" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L163" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -686,7 +690,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L168" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L168" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -704,7 +708,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L175" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L175" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -731,7 +735,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L204" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L204" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -758,7 +762,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L213" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L213" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -776,7 +780,7 @@ The order is as follows:</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime.cr#L62" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>

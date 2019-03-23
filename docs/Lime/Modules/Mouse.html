@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.27.0">
+<meta name="generator" content="Crystal Docs 0.27.2">
 
 
 <link href="../../css/style.css" rel="stylesheet" type="text/css">
@@ -35,6 +35,11 @@
 
   <div class="types-list">
     <ul>
+  
+  <li class=" " data-id="github.com/r00ster91/lime/toplevel" data-name="top level namespace">
+      <a href="../../toplevel.html">Top Level Namespace</a>
+      
+    </li>
   
   <li class="parent open current" data-id="github.com/r00ster91/lime/Lime" data-name="lime">
       <a href="../../Lime.html">Lime</a>
@@ -155,7 +160,7 @@
 
   <h2>Overview</h2>
 
-  <p>The mouse pointer.</p>
+  <p>The mouse pointer of the system.</p>
 
 <p><span class="flag purple">NOTE</span>  The default mouse event report mode is <code><a href="../../Lime/Modules/Mouse/Mode.html#Off">Mode::Off</a></code> which won't report any mouse events.
 To set a mouse event report mode, use <code><a href="../../Lime/Modules/Mouse.html#mode%3D%28mode%3AMode%29-instance-method">#mode=</a></code>.</p>
@@ -183,7 +188,7 @@ To set a mouse event report mode, use <code><a href="../../Lime/Modules/Mouse.ht
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/modules.cr#L94" target="_blank">
+      <a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/modules.cr#L96" target="_blank">
         lime/modules.cr
       </a>
     
@@ -276,7 +281,7 @@ To set a mouse event report mode, use <code><a href="../../Lime/Modules/Mouse.ht
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/modules.cr#L98" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/modules.cr#L102" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -294,7 +299,7 @@ To set a mouse event report mode, use <code><a href="../../Lime/Modules/Mouse.ht
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/modules.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/modules.cr#L105" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -321,7 +326,7 @@ This extends the range to be greater than 94 by using the 1006 SGR (Select Graph
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/modules.cr#L155" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/modules.cr#L157" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -335,12 +340,14 @@ This extends the range to be greater than 94 by using the 1006 SGR (Select Graph
       </div>
       
         <div class="doc"><p>Waits for input and returns <code><a href="../../Lime/Modules/Mouse/Event.html">Event</a></code> if the input is a mouse event,
-<code>nil</code> if the input is not a mouse event or if <code><a href="../../Lime/Modules/Mouse.html#mode%3AMode-class-method">.mode</a></code> is <code><a href="../../Lime/Modules/Mouse/Mode.html#Off">Mode::Off</a></code>.</p></div>
+<code>nil</code> if the input is not a mouse event or if <code><a href="../../Lime/Modules/Mouse.html#mode%3AMode-class-method">.mode</a></code> is <code><a href="../../Lime/Modules/Mouse/Mode.html#Off">Mode::Off</a></code>.</p>
+
+<p><span class="flag purple">NOTE</span>  Ctrl+C is caught by this method and will not be handled by the system.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/modules.cr#L220" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/modules.cr#L218" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -358,7 +365,7 @@ This extends the range to be greater than 94 by using the 1006 SGR (Select Graph
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/modules.cr#L121" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/modules.cr#L123" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -372,12 +379,14 @@ This extends the range to be greater than 94 by using the 1006 SGR (Select Graph
       </div>
       
         <div class="doc"><p>Returns the mouse event happening in the moment this method is called as <code><a href="../../Lime/Modules/Mouse/Event.html">Event</a></code>,
-<code>nil</code> if the input is not a mouse event or if <code><a href="../../Lime/Modules/Mouse.html#mode%3AMode-class-method">.mode</a></code> is <code><a href="../../Lime/Modules/Mouse/Mode.html#Off">Mode::Off</a></code>.</p></div>
+<code>nil</code> if the input is not a mouse event or if <code><a href="../../Lime/Modules/Mouse.html#mode%3AMode-class-method">.mode</a></code> is <code><a href="../../Lime/Modules/Mouse/Mode.html#Off">Mode::Off</a></code>.</p>
+
+<p><span class="flag purple">NOTE</span>  Ctrl+C can be caught by this method and will not be handled by the system.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/r00ster91/lime/blob/8950290c5faed2824f7060a57ec520e2640c16cb/src/lime/modules.cr#L288" target="_blank">View source</a>]
+          [<a href="https://github.com/r00ster91/lime/blob/d983ca99caf53726fdf8c49b6330554997482f3f/src/lime/modules.cr#L288" target="_blank">View source</a>]
         
       </div>
     </div>
