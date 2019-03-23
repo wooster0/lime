@@ -8,13 +8,13 @@ end
 
 # The main module of lime.
 #
-# All `x`, `y` arguments are zero-based.
+# All `x` and `y` arguments are zero-based.
 #
 # An `IndexError` will be raised if:
-# * An `x` argument is greater than *`Window.width`*.
-# * An `x` argument is lower than *`-Window.width_cells`*.
-# * An `y` argument is greater than *`Window.height`*.
-# * An `y` argument is lower than *`-Window.height_cells`*.
+# * An `x` argument is greater than `Window.width`.
+# * An `x` argument is lower than `-Window.width_cells`.
+# * A `y` argument is greater than `Window.height`.
+# * A `y` argument is lower than `-Window.height_cells`.
 #
 # NOTE: Sometimes you might come across the terms "cell" and "pixel":
 # * A "cell" refers to one place of a character on the console: `█`.
@@ -23,8 +23,7 @@ end
 module Lime
   extend self
 
-  @@empty_buffer = Array(Char | Colorize::Object(Char)).new(Window.width_cells*Window.height_cells) { ' ' }
-  @@buffer : Array(Char | Colorize::Object(Char)) = @@empty_buffer.dup
+  @@buffer = Array(Char | Colorize::Object(Char)).new(Window.width_cells*Window.height_cells) { ' ' }
 
   # Sets the height of the buffer to *height*.
   def bufferHeight=(height)
@@ -32,11 +31,9 @@ module Lime
     if height > @@buffer.size/Window.width_cells
       count.times do
         @@buffer << ' '
-        @@empty_buffer << ' '
       end
     else
-      @@buffer = @@buffer.shift(count)
-      @@empty_buffer = @@empty_buffer.shift(count)
+      @@buffer.shift(count)
     end
   end
 
@@ -70,8 +67,7 @@ module Lime
 
   # Clears the buffer.
   def clear
-    # Instead of rebuilding the whole buffer every time again, copy the empty buffer:
-    @@buffer = @@empty_buffer.dup
+    @@buffer.fill { ' ' }
   end
 
   # Waits until a key has been pressed and returns it.
@@ -95,6 +91,9 @@ module Lime
     STDIN.read_timeout = nil
   end
 
+  # TODO: remove these nodocs and the nodoc in Pixels after 0.27.2
+
+  # :nodoc:
   private KEYS = {
     {:up, "up arrow"}, {:down, "down arrow"},
     {:left, "left arrow"}, {:right, "right arrow"},
@@ -105,6 +104,7 @@ module Lime
     {:ctrl_c, "Ctrl+C"},
   }
 
+  # :nodoc:
   private KEY_BODY = <<-KEY_BODY
     when "\\e[A"
       :up
@@ -228,8 +228,7 @@ module Lime
     end
   end
 
-  # Like a game loop.
-  # The order is as follows:
+  # The order of the loop is as follows:
   #
   # **1.** Executes the given block.
   #
@@ -376,20 +375,21 @@ module Lime
   def line_low(x1, y1, x2, y2, color)
     dx = x2 - x1
     dy = y2 - y1
-    yi = 1
     if dy < 0
       yi = -1
       dy = -dy
+    else
+      yi = 1
     end
     d = 2*dy - dx
     y = y1
     (x1..x2).each do |x|
       Lime.pixel(x, y, color)
       if d > 0
-        y = y + yi
-        d = d - 2*dx
+        y += yi
+        d -= 2*dx
       end
-      d = d + 2*dy
+      d += 2*dy
     end
   end
 
@@ -397,20 +397,21 @@ module Lime
   def line_high(x1, y1, x2, y2, color)
     dx = x2 - x1
     dy = y2 - y1
-    xi = 1
     if dx < 0
       xi = -1
       dx = -dx
+    else
+      xi = 1
     end
     d = 2*dx - dy
     x = x1
     (y1..y2).each do |y|
       Lime.pixel(x, y, color)
       if d > 0
-        x = x + xi
-        d = d - 2*dy
+        x += xi
+        d -= 2*dy
       end
-      d = d + 2*dx
+      d += 2*dx
     end
   end
 end

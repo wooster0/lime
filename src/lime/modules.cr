@@ -1,7 +1,7 @@
 module Lime
-  # Modules for interacting with various functionality.
+  # Modules for interacting with various system functionalities.
   #
-  # The modules are available on the Top Level Namespace by default.
+  # The modules are available on the top-level by default.
   module Modules
     # The window of the console.
     module Window
@@ -80,6 +80,8 @@ module Lime
       # Sets the position of the cursor to *position*.
       # ```
       # Cursor.position = {5, 5}
+      #
+      # # The cursor is now at position 5, 5
       # ```
       def position=(position : Tuple(Int32, Int32))
         # Row and column for the ANSI escape sequence need to be one-based
@@ -87,7 +89,7 @@ module Lime
       end
     end
 
-    # The mouse pointer.
+    # The mouse pointer of the system.
     #
     # NOTE: The default mouse event report mode is `Mode::Off` which won't report any mouse events.
     # To set a mouse event report mode, use `mode=`.
@@ -144,7 +146,7 @@ module Lime
 
       at_exit do
         off
-        print "\e[?1006l" if @@extended
+        Mouse.extend(false) if @@extended
       end
 
       # Extends the mouse event report range if *bool* is `true`, otherwise resets the range.
@@ -152,7 +154,7 @@ module Lime
       # The default X10 mouse protocol doesn't support mouse event reporting with
       # x, y coordinates greater than 94.
       # This extends the range to be greater than 94 by using the 1006 SGR (Select Graphic Rendition) mouse protocol.
-      def extend(bool = true) # The argument can't be named `extend` since it's a keyword
+      def extend(bool = true) # The argument can't be called `extend` because it's a keyword
         if bool
           print "\e[?1006h"
           @@extended = true
@@ -164,7 +166,7 @@ module Lime
 
       # A mouse event.
       record Event, x : Int32, y : Int32, type : Symbol do
-        # Returns the type of mouse event.
+        # Returns the type of mouse event:
         #
         # * `:release` if a mouse button has been released.
         #
@@ -186,19 +188,13 @@ module Lime
         # * `:move` if the mouse has been moved.
         getter type : Symbol
 
-        # Returns the kind of mouse event based on `type`.
+        # Returns the kind of mouse event based on `type`:
         #
         # * `:release` if a mouse button has been released.
         # * `:click` if a mouse button has been pressed.
         # * `:wheel` if the wheel has been scrolled.
-        #
-        # Only if `mode` is `Mode::Drag` or `Mode::All`:
-        #
-        # * `:drag` if a mouse button has been pressed and the mouse has been moved.
-        #
-        # Only if `mode` is `Mode::All`:
-        #
-        # * `:move` if the mouse has been moved.
+        # * `:drag` if `mode` is `Mode::Drag` or `Mode::All` and a mouse button has been pressed and the mouse has been moved.
+        # * `:move` if `mode` is `Mode::All` and the mouse has been moved.
         def kind : Symbol
           case type
           when :left, :wheel, :right
@@ -217,6 +213,8 @@ module Lime
 
       # Waits for input and returns `Event` if the input is a mouse event,
       # `nil` if the input is not a mouse event or if `mode` is `Mode::Off`.
+      #
+      # NOTE: Ctrl+C is caught by this method and will not be handled by the system.
       def get : Event?
         return nil if mode.off?
 
@@ -285,6 +283,8 @@ module Lime
 
       # Returns the mouse event happening in the moment this method is called as `Event`,
       # `nil` if the input is not a mouse event or if `mode` is `Mode::Off`.
+      #
+      # NOTE: Ctrl+C can be caught by this method and will not be handled by the system.
       def peek : Event?
         STDIN.read_timeout = 0.01
         Mouse.get

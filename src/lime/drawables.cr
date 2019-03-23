@@ -3,7 +3,7 @@ require "stumpy_png"
 module Lime
   # Drawables that can be inserted into the buffer using the `draw` method of every drawable.
   #
-  # The drawables are available on the Top Level Namespace by default.
+  # The drawables are available on the top-level by default.
   module Drawables
     # A drawable rectangle.
     struct Rectangle
@@ -85,13 +85,10 @@ module Lime
         end
       end
 
-      # TODO: use ` instead of ** at the Top Level Namespace constants in the
-      # `initialize` description after 0.27.1 is released
-
       # Initializes a new `Rectangle`.
       #
-      # For specifying the type, you can use the Top Level Namespace constants
-      # **Default**, **Double** and **Round**.
+      # For specifying the type, you can use the top-level constants
+      # `Default`, `Double` and `Round`.
       def initialize(@x : Int32, @y : Int32, @width : Int32, @height : Int32, @type : Type = Default, @color : Colorize::Color = Colorize::ColorANSI::Default)
         init
       end
@@ -220,7 +217,7 @@ module Lime
 
       # Initializes new `Pixels` from an image.
       #
-      # *path* must lead to an PNG encoded image.
+      # *path* must lead to an PNG-encoded image.
       def initialize(path : String, @x : Int32, @y : Int32)
         canvas = StumpyPNG.read(path)
         @width, @height = canvas.width, canvas.height
@@ -243,6 +240,7 @@ module Lime
         @pixels.pop
       end
 
+      # :nodoc:
       private COLOR_CHARACTERS = {
         {'1', "default"},
         {'0', "black"},
