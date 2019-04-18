@@ -240,7 +240,6 @@ module Lime
         @pixels.pop
       end
 
-      # :nodoc:
       private COLOR_CHARACTERS = {
         {'1', "default"},
         {'0', "black"},

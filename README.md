@@ -100,12 +100,13 @@ For technical information about lime, see [`src/README.md`](https://github.com/r
 
 1. Fork it (<https://github.com/r00ster91/lime/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Make your changes
-4. Format the code (`crystal tool format`)
-5. Make sure the specs compile (`crystal spec -v`)
-6. Commit your changes (`git commit -am 'Add some feature'`)
-7. Push to the branch (`git push origin my-new-feature`)
-8. Create a new Pull Request
+3. Install required shards (`shards install`)
+4. Make your changes
+5. Format the code (`crystal tool format`)
+6. Make sure the specs compile (`crystal spec -v`)
+7. Commit your changes (`git commit -am 'Add some feature'`)
+8. Push to the branch (`git push origin my-new-feature`)
+9. Create a new Pull Request
 
 ## Contributors
 

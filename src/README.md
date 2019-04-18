@@ -27,4 +27,4 @@ which means that the **850**th empty space in the buffer will be replaced by an 
 
 The next step is to call `Lime.draw` which iterates through every single character in the buffer and builds one big string which is then being printed. That's of course much faster than printing every character seperately.
 
-Usually if you use `Lime.draw` in a loop, you put a `Lime.clear` after it which clears the buffer so you have room for drawing new stuff. `Lime.clear` replaces every element of the buffer by a space. Now the normal buffer is containing spaces again and when the buffer is drawn, the screen will appear as empty.
+Usually if you use `Lime.draw` in a loop, you put a `Lime.clear` after it which clears the buffer so you have room for drawing new stuff. `Lime.clear` replaces every element of the buffer by a space. Now the buffer is containing spaces again and when the buffer is drawn, the screen will appear as empty.

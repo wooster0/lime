@@ -2,10 +2,6 @@ require "colorize"
 require "./lime/drawables"
 require "./lime/modules"
 
-struct Colorize::Object
-  getter fore, back
-end
-
 # The main module of lime.
 #
 # All `x` and `y` arguments are zero-based.
@@ -91,9 +87,6 @@ module Lime
     STDIN.read_timeout = nil
   end
 
-  # TODO: remove these nodocs and the nodoc in Pixels after 0.27.2
-
-  # :nodoc:
   private KEYS = {
     {:up, "up arrow"}, {:down, "down arrow"},
     {:left, "left arrow"}, {:right, "right arrow"},
@@ -104,7 +97,6 @@ module Lime
     {:ctrl_c, "Ctrl+C"},
   }
 
-  # :nodoc:
   private KEY_BODY = <<-KEY_BODY
     when "\\e[A"
       :up
@@ -173,18 +165,12 @@ module Lime
 
   # :ditto:
   def print(string : Colorize::Object(String), x : Int32, y : Int32)
-    fore = string.fore
-    back = string.back
-    string = string.to_s
-    if fore == Colorize::ColorANSI::Default && back == Colorize::ColorANSI::Default
-      Lime.print(string, x, y)
-    else
-      # Remove color escape sequences:
-      string = string[string.index('m').not_nil! + 1..string.rindex('\e').not_nil! - 1]
+    fore = string.@fore
+    back = string.@back
+    object = string.@object.to_s
 
-      string.each_char_with_index do |char, i|
-        Lime.print(char.colorize(fore).back(back), x + i, y)
-      end
+    object.each_char_with_index do |char, i|
+      Lime.print(char.colorize(fore).back(back), x + i, y)
     end
   end
 
@@ -211,20 +197,14 @@ module Lime
 
   # :ditto:
   def printf(string : Colorize::Object(String), x : Int32, y : Int32)
-    fore = string.fore
-    back = string.back
-    string = string.to_s
-    if fore == Colorize::ColorANSI::Default && back == Colorize::ColorANSI::Default
-      Lime.printf(string, x, y)
-    else
-      # Remove color escape sequences:
-      string = string[string.index('m').not_nil! + 1..string.rindex('\e').not_nil! - 1]
+    fore = string.@fore
+    back = string.@back
+    object = string.@object.to_s
 
-      i = 0
-      string.each_line do |line|
-        Lime.print(line.colorize.fore(fore).back(back), x, y + i)
-        i += 1
-      end
+    i = 0
+    object.each_line do |line|
+      Lime.print(line.colorize.fore(fore).back(back), x, y + i)
+      i += 1
     end
   end
 
@@ -264,6 +244,7 @@ module Lime
   def pixel(x : Int32, y : Int32, color : Colorize::Color = Colorize::ColorANSI::Default)
     char = Lime.buffer(x, y/2)
 
+    # This code was an absolute nightmare
     pixel = if y.even?
               if char.to_s == "▀"
                 if color == Colorize::ColorANSI::Default
@@ -278,11 +259,11 @@ module Lime
                   '▄'.colorize.back(color)
                 end
               elsif char.to_s.includes?('▄')
-                if color == Colorize::ColorANSI::Default && char.as(Colorize::Object(Char)).fore == Colorize::ColorANSI::Default
+                if color == Colorize::ColorANSI::Default && char.as(Colorize::Object(Char)).@fore == Colorize::ColorANSI::Default
                   '█'
                 elsif char.is_a?(Colorize::Object(Char))
                   if color == Colorize::ColorANSI::Default
-                    '▀'.colorize.back(char.fore)
+                    '▀'.colorize.back(char.@fore)
                   else
                     char.back(color)
                   end
@@ -291,7 +272,7 @@ module Lime
                 end
               else
                 if char.is_a?(Colorize::Object(Char))
-                  '▀'.colorize(color).back(char.back)
+                  '▀'.colorize(color).back(char.@back)
                 else
                   '▀'.colorize(color)
                 end
@@ -310,11 +291,11 @@ module Lime
                   '▀'.colorize.back(color)
                 end
               elsif char.to_s.includes?('▀')
-                if color == Colorize::ColorANSI::Default && char.as(Colorize::Object(Char)).fore == Colorize::ColorANSI::Default
+                if color == Colorize::ColorANSI::Default && char.as(Colorize::Object(Char)).@fore == Colorize::ColorANSI::Default
                   '█'
                 elsif char.is_a?(Colorize::Object(Char))
                   if color == Colorize::ColorANSI::Default
-                    '▄'.colorize.back(char.fore)
+                    '▄'.colorize.back(char.@fore)
                   else
                     char.back(color)
                   end
@@ -323,7 +304,7 @@ module Lime
                 end
               else
                 if char.is_a?(Colorize::Object(Char))
-                  '▄'.colorize(color).back(char.back)
+                  '▄'.colorize(color).back(char.@back)
                 else
                   '▄'.colorize(color)
                 end
