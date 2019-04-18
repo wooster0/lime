@@ -33,13 +33,16 @@ module Lime
     end
   end
 
+  @@io = IO::Memory.new(@@buffer.size)
+
   # Returns the content of the buffer as a string.
   def buffer : String
-    String.build do |io|
-      @@buffer.each do |char|
-        io << char
-      end
+    @@buffer.each do |char|
+      @@io << char
     end
+    buffer = @@io.to_s
+    @@io.clear
+    buffer
   end
 
   # Sets the buffer to *buffer*.
