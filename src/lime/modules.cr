@@ -121,7 +121,7 @@ module Lime
 
       # Sets the mouse event report mode to *mode*.
       def mode=(@@mode : Mode)
-        case mode
+        case @@mode
         when .off?
           off
         when .click?
@@ -134,7 +134,7 @@ module Lime
       end
 
       private def off
-        case mode
+        case @@mode
         when .click?
           print "\e[?1000l"
         when .drag?

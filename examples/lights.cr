@@ -11,16 +11,16 @@ light2 = Rectangle.new(8, 1, 5, 3, Double, :green)
 light3 = Rectangle.new(14, 1, 5, 3, Double, :blue)
 
 # The light that is currently on
-active = 1
+light = 1
 
 loop do
-  if active == 3
-    active = 1
+  if light == 3
+    light = 1
   else
-    active += 1
+    light += 1
   end
 
-  case active
+  case light
   when 1
     light1.color = :light_red
     light2.color = :green
@@ -42,7 +42,7 @@ loop do
 
   # Draw the content of the buffer to the screen:
   Lime.draw
-  # Clear the buffer so we have room for new stuff:
+  # Clear the buffer (not the screen) so we have room for the next frame:
   Lime.clear
 
   # You can use `Lime.loop` instead of a normal loop to skip the above two steps

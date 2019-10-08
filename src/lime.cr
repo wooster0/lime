@@ -15,14 +15,14 @@ require "./lime/modules"
 # NOTE: Sometimes you might come across the terms "cell" and "pixel":
 # * A "cell" refers to one place of a character on the console: `█`.
 # * A "pixel" **does not** refer to a pixel of a display.
-#   It refers to the **half** of a "cell": `▀`, `▄` (also called a "half block").
+#   It refers to the **half** of a "cell": `▀` and `▄`.
 module Lime
   extend self
 
   @@buffer = Array(Char | Colorize::Object(Char)).new(Window.width_cells*Window.height_cells) { ' ' }
 
   # Sets the height of the buffer to *height*.
-  def bufferHeight=(height)
+  def buffer_height=(height)
     count = Window.width_cells*height
     if height > @@buffer.size/Window.width_cells
       count.times do
@@ -245,7 +245,7 @@ module Lime
   #   █
   # ```
   def pixel(x : Int32, y : Int32, color : Colorize::Color = Colorize::ColorANSI::Default)
-    char = Lime.buffer(x, y/2)
+    char = Lime.buffer(x, y//2)
 
     # This code was an absolute nightmare
     pixel = if y.even?
@@ -314,7 +314,7 @@ module Lime
               end
             end
 
-    Lime.print(pixel, x, y/2)
+    Lime.print(pixel, x, y//2)
   end
 
   # Inserts a line from *x1*, *y1* to *x2*, *y2* with *color* into the buffer.

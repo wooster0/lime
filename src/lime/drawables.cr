@@ -4,6 +4,18 @@ module Lime
   # Drawables that can be inserted into the buffer using the `draw` method of every drawable.
   #
   # The drawables are available on the top-level by default.
+  #
+  # Simple example of drawing a `Drawable`:
+  #
+  # ```
+  # rectangle = Rectangle.new(x: 0, y: 0, width: 20, height: 10, type: Default, color: :light_blue)
+  #
+  # Insert the rectangle into the buffer.
+  # rectangle.draw
+  #
+  # Show the buffer and thus the rectangle.
+  # Lime.draw
+  # ```
   module Drawables
     # A drawable rectangle.
     struct Rectangle
