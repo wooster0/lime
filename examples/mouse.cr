@@ -17,24 +17,24 @@ end
 
 # A random position for the target and its hitbox
 x, y = rand(1..20), rand(10)
-target = Rectangle.new(x, y, 3, 2, Round, :white)
+target = Rectangle.new(x, y, 3, 2, color: :white)
 hitbox = Hitbox.new(x, y)
 
 # Set the mouse mode to Click which will report all clicks:
 Mouse.mode = Mouse::Mode::Click
 
-puts "Press any mouse button to start"
+puts "Press any mouse button to start."
 
 loop do
   # Wait for an event:
   event = Mouse.get
 
   # Exit if the event is not a mouse event:
-  exit if event.nil?
+  abort("Event was not a mouse event.", 0) if event.nil?
 
   # Place the target at a new random position if the target has been hit:
   if collision?(event, hitbox)
-    x, y = rand(1..20), rand(10)
+    x, y = rand(1..50), rand(25)
 
     target.x = x
     target.y = y
