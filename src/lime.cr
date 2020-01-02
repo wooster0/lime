@@ -21,28 +21,9 @@ module Lime
 
   @@buffer = Array(Char | Colorize::Object(Char)).new(Window.width_cells*Window.height_cells) { ' ' }
 
-  # Sets the height of the buffer to *height*.
-  def buffer_height=(height)
-    count = Window.width_cells*height
-    if height > @@buffer.size/Window.width_cells
-      count.times do
-        @@buffer << ' '
-      end
-    else
-      @@buffer.shift(count)
-    end
-  end
-
-  @@io = IO::Memory.new(@@buffer.size)
-
-  # Returns the content of the buffer as a string.
-  def buffer : String
-    @@buffer.each do |char|
-      @@io << char
-    end
-    buffer = @@io.to_s
-    @@io.clear
-    buffer
+  # Returns the buffer as an array of characters.
+  def buffer : Array(Char | Colorize::Object(Char))
+    @@buffer
   end
 
   # Sets the buffer to *buffer*.
@@ -54,19 +35,34 @@ module Lime
     @@buffer[x + Window.width_cells * y]
   end
 
-  # Returns the buffer as an array of characters.
-  def raw_buffer : Array(Char | Colorize::Object(Char))
-    @@buffer
-  end
+  @@io = IO::Memory.new(@@buffer.size)
 
   # Draws the content of the buffer to the screen.
+  #
+  # NOTE: This should not be called concurrently.
   def draw
-    print(Lime.buffer)
+    @@buffer.each do |char|
+      @@io << char
+    end
+    STDOUT.write(@@io.to_slice)
+    @@io.clear
   end
 
   # Clears the buffer.
   def clear
     @@buffer.fill { ' ' }
+  end
+
+  # Sets the height of the buffer to *height*.
+  def buffer_height=(height)
+    count = Window.width_cells*height
+    if height > @@buffer.size/Window.width_cells
+      count.times do
+        @@buffer << ' '
+      end
+    else
+      @@buffer.shift(count)
+    end
   end
 
   # Waits until a key has been pressed and returns it.
@@ -219,7 +215,7 @@ module Lime
   #
   # **3.** Clears the buffer.
   def loop
-    ::loop do
+    while true
       yield
       Lime.draw
       Lime.clear
