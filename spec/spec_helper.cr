@@ -33,7 +33,13 @@ class String
 end
 
 def buffer
-  buffer = Lime.buffer.pieces(Window.width_cells)
+  string = String.build do |io|
+    Lime.buffer.each do |char|
+      io << char
+    end
+  end
+
+  buffer = string.pieces(Window.width_cells)
   Lime.clear
 
   skip = true
