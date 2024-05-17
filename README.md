@@ -1,4 +1,4 @@
-### [Wool](https://github.com/r00ster91/wool) supersedes this library. It can more or less do everything this library can.
+### [Soft](https://github.com/r00ster91/soft) supersedes this library. It can more or less do everything this library can.
 
 ---
 
