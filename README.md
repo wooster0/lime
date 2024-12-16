@@ -1,7 +1,3 @@
-### [Soft](https://github.com/r00ster91/soft) supersedes this library. It can more or less do everything this library can.
-
----
-
 [![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://r00ster91.github.io/lime/)
 
 # lime
